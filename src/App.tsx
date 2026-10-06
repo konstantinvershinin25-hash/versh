@@ -1775,9 +1775,9 @@ export default function App() {
 
           <a
             className="contact-link"
-            href="mailto:hello@versh.design"
+            href="mailto:konstantinversh@icloud.com"
           >
-            hello@versh.design
+            konstantinversh@icloud.com
             <span>
               ↗
             </span>
