@@ -290,7 +290,178 @@ const petDayImages = [
   },
 ]
 
+
+// VERSH_LANGUAGE_PATCH_V1
+type SiteLanguage = 'ru' | 'en'
+
+const LANGUAGE_COPY: Record<string, { ru: string; en: string }> = {
+  'WORK': { ru: 'РАБОТЫ', en: 'WORK' },
+  'ABOUT': { ru: 'ОБО МНЕ', en: 'ABOUT' },
+  'CONTACT': { ru: 'КОНТАКТЫ', en: 'CONTACT' },
+  'AVAILABLE': { ru: 'ОТКРЫТ К ПРОЕКТАМ', en: 'AVAILABLE FOR PROJECTS' },
+  'INDEPENDENT DIGITAL DESIGNER / 2026': { ru: 'НЕЗАВИСИМЫЙ DIGITAL-ДИЗАЙНЕР / 2026', en: 'INDEPENDENT DIGITAL DESIGNER / 2026' },
+  'I BUILD': { ru: 'Я СОЗДАЮ', en: 'I BUILD' },
+  'DIGITAL': { ru: 'ЦИФРОВЫЕ', en: 'DIGITAL' },
+  'EXPERIENCES': { ru: 'ВПЕЧАТЛЕНИЯ', en: 'EXPERIENCES' },
+  'WEB DESIGN / BRANDING / ART DIRECTION': { ru: 'ВЕБ-ДИЗАЙН / БРЕНДИНГ / АРТ-ДИРЕКШН', en: 'WEB DESIGN / BRANDING / ART DIRECTION' },
+  'BASED IN EUROPE — WORKING WORLDWIDE': { ru: 'ЕВРОПА — РАБОТАЮ ПО ВСЕМУ МИРУ', en: 'BASED IN EUROPE — WORKING WORLDWIDE' },
+  'SCROLL TO EXPLORE': { ru: 'ЛИСТАЙТЕ, ЧТОБЫ ПОСМОТРЕТЬ', en: 'SCROLL TO EXPLORE' },
+  '01 — SELECTED WORKS': { ru: '01 — ИЗБРАННЫЕ ПРОЕКТЫ', en: '01 — SELECTED WORKS' },
+  'VIEW CASE': { ru: 'СМОТРЕТЬ КЕЙС', en: 'VIEW CASE' },
+  '02 — ABOUT': { ru: '02 — ОБО МНЕ', en: '02 — ABOUT' },
+  'DESIGNING': { ru: 'ДИЗАЙН', en: 'DESIGNING' },
+  'WITH INTENT.': { ru: 'СО СМЫСЛОМ.', en: 'WITH INTENT.' },
+  'MORE ABOUT ME': { ru: 'БОЛЬШЕ ОБО МНЕ', en: 'MORE ABOUT ME' },
+  '03 — SERVICES': { ru: '03 — УСЛУГИ', en: '03 — SERVICES' },
+  'WHAT I DO': { ru: 'ЧЕМ Я ЗАНИМАЮСЬ', en: 'WHAT I DO' },
+  '04 — CONTACT': { ru: '04 — КОНТАКТЫ', en: '04 — CONTACT' },
+  "LET'S TALK": { ru: 'ДАВАЙТЕ ОБСУДИМ ПРОЕКТ', en: "LET'S TALK" },
+  'HAVE A PROJECT': { ru: 'ЕСТЬ ПРОЕКТ', en: 'HAVE A PROJECT' },
+  'IN MIND?': { ru: 'НА ПРИМЕТЕ?', en: 'IN MIND?' },
+  'DESIGNED & BUILT BY VERSH': { ru: 'ДИЗАЙН И РАЗРАБОТКА — VERSH', en: 'DESIGNED & BUILT BY VERSH' },
+  'BACK TO TOP ↑': { ru: 'НАВЕРХ ↑', en: 'BACK TO TOP ↑' },
+  'BACK TO WORK ↑': { ru: 'К ПРОЕКТАМ ↑', en: 'BACK TO WORK ↑' },
+  '← BACK TO WORK': { ru: '← К ПРОЕКТАМ', en: '← BACK TO WORK' },
+  'BACK TO WORK': { ru: 'К ПРОЕКТАМ', en: 'BACK TO WORK' },
+  'SERVICES': { ru: 'УСЛУГИ', en: 'SERVICES' },
+  '01 — OVERVIEW': { ru: '01 — ОБЗОР', en: '01 — OVERVIEW' },
+  '02 — SYSTEM': { ru: '02 — ДИЗАЙН-СИСТЕМА', en: '02 — SYSTEM' },
+  '04 — RESULT': { ru: '04 — РЕЗУЛЬТАТ', en: '04 — RESULT' },
+  'NEXT PROJECT': { ru: 'СЛЕДУЮЩИЙ ПРОЕКТ', en: 'NEXT PROJECT' },
+  'VIEW CASE ↗': { ru: 'СМОТРЕТЬ КЕЙС ↗', en: 'VIEW CASE ↗' },
+  'CONTENT MANAGER': { ru: 'УПРАВЛЕНИЕ КОНТЕНТОМ', en: 'CONTENT MANAGER' },
+  '← BACK TO SITE': { ru: '← НА САЙТ', en: '← BACK TO SITE' },
+  'LOG OUT': { ru: 'ВЫЙТИ', en: 'LOG OUT' },
+  'CMS / ACCESS': { ru: 'CMS / ДОСТУП', en: 'CMS / ACCESS' },
+  'CHECKING ACCESS.': { ru: 'ПРОВЕРЯЕМ ДОСТУП.', en: 'CHECKING ACCESS.' },
+  'ENTER PASSWORD.': { ru: 'ВВЕДИТЕ ПАРОЛЬ.', en: 'ENTER PASSWORD.' },
+  'PASSWORD': { ru: 'ПАРОЛЬ', en: 'PASSWORD' },
+  'ENTER CMS ↗': { ru: 'ВОЙТИ В CMS ↗', en: 'ENTER CMS ↗' },
+  'CMS / PROJECTS': { ru: 'CMS / ПРОЕКТЫ', en: 'CMS / PROJECTS' },
+  'BUILD YOUR CASE.': { ru: 'СОЗДАЙТЕ КЕЙС.', en: 'BUILD YOUR CASE.' },
+  'NEW PROJECT +': { ru: 'НОВЫЙ ПРОЕКТ +', en: 'NEW PROJECT +' },
+  'DESCRIPTION': { ru: 'ОПИСАНИЕ', en: 'DESCRIPTION' },
+  'OVERVIEW TITLE': { ru: 'ЗАГОЛОВОК ОБЗОРА', en: 'OVERVIEW TITLE' },
+  'OVERVIEW TEXT': { ru: 'ТЕКСТ ОБЗОРА', en: 'OVERVIEW TEXT' },
+  'SYSTEM TITLE': { ru: 'ЗАГОЛОВОК СИСТЕМЫ', en: 'SYSTEM TITLE' },
+  'SYSTEM TEXT': { ru: 'ТЕКСТ СИСТЕМЫ', en: 'SYSTEM TEXT' },
+  'RESULT TITLE': { ru: 'ЗАГОЛОВОК РЕЗУЛЬТАТА', en: 'RESULT TITLE' },
+  'RESULT TEXT': { ru: 'ТЕКСТ РЕЗУЛЬТАТА', en: 'RESULT TEXT' },
+  'CASE SECTIONS': { ru: 'БЛОКИ КЕЙСА', en: 'CASE SECTIONS' },
+  'BUILD THE CASE WITHOUT TOUCHING CODE': { ru: 'СОБИРАЙТЕ КЕЙС БЕЗ ИЗМЕНЕНИЯ КОДА', en: 'BUILD THE CASE WITHOUT TOUCHING CODE' },
+  'DELETE': { ru: 'УДАЛИТЬ', en: 'DELETE' },
+  'REMOVE IMAGE': { ru: 'УДАЛИТЬ ИЗОБРАЖЕНИЕ', en: 'REMOVE IMAGE' },
+  'UPLOAD IMAGE': { ru: 'ЗАГРУЗИТЬ ИЗОБРАЖЕНИЕ', en: 'UPLOAD IMAGE' },
+  'IMAGE POSITION': { ru: 'ПОЛОЖЕНИЕ ИЗОБРАЖЕНИЯ', en: 'IMAGE POSITION' },
+  'IMAGES': { ru: 'ИЗОБРАЖЕНИЯ', en: 'IMAGES' },
+  'UPLOAD, THEN DRAG TO REORDER': { ru: 'ЗАГРУЗИТЕ, ЗАТЕМ ПЕРЕТАЩИТЕ ДЛЯ ИЗМЕНЕНИЯ ПОРЯДКА', en: 'UPLOAD, THEN DRAG TO REORDER' },
+  'ADD IMAGE': { ru: 'ДОБАВИТЬ ИЗОБРАЖЕНИЕ', en: 'ADD IMAGE' },
+  'YOUR PROJECTS': { ru: 'ВАШИ ПРОЕКТЫ', en: 'YOUR PROJECTS' },
+  'Projects created here will appear in this list.': { ru: 'Созданные проекты появятся в этом списке.', en: 'Projects created here will appear in this list.' },
+  'NO IMG': { ru: 'НЕТ ФОТО', en: 'NO IMG' },
+  'EDIT': { ru: 'ИЗМЕНИТЬ', en: 'EDIT' },
+  'VIEW': { ru: 'СМОТРЕТЬ', en: 'VIEW' },
+  'CREATE PROJECT': { ru: 'СОЗДАТЬ ПРОЕКТ', en: 'CREATE PROJECT' },
+  'SAVE CHANGES': { ru: 'СОХРАНИТЬ ИЗМЕНЕНИЯ', en: 'SAVE CHANGES' },
+  'CANCEL': { ru: 'ОТМЕНА', en: 'CANCEL' },
+}
+
+function translateTextNode(value: string, language: SiteLanguage): string {
+  const trimmed = value.trim()
+  if (!trimmed) return value
+  const entry = LANGUAGE_COPY[trimmed] || Object.values(LANGUAGE_COPY).find((item) => item.ru === trimmed || item.en === trimmed)
+  if (!entry) return value
+  const leading = value.match(/^\s*/)?.[0] ?? ''
+  const trailing = value.match(/\s*$/)?.[0] ?? ''
+  return `${leading}${entry[language]}${trailing}`
+}
+
+function LanguageSwitch({ language, onToggle }: { language: SiteLanguage; onToggle: () => void }) {
+  return (
+    <button
+      type="button"
+      aria-label={language === 'ru' ? 'Switch language to English' : 'Переключить язык на русский'}
+      onClick={onToggle}
+      style={{
+        background: 'transparent',
+        border: '1px solid currentColor',
+        borderRadius: '999px',
+        padding: '7px 11px',
+        color: 'inherit',
+        font: 'inherit',
+        fontSize: '11px',
+        letterSpacing: '.08em',
+        cursor: 'pointer',
+      }}
+    >
+      {language === 'ru' ? 'RU / EN' : 'EN / RU'}
+    </button>
+  )
+}
+// END VERSH_LANGUAGE_PATCH_V1
+
+
 export default function App() {
+  const [language, setLanguage] = useState<SiteLanguage>(() => {
+    try {
+      return localStorage.getItem('versh_language') === 'en' ? 'en' : 'ru'
+    } catch {
+      return 'ru'
+    }
+  })
+
+  const toggleLanguage = () => {
+    setLanguage((current) => {
+      const next = current === 'ru' ? 'en' : 'ru'
+      try { localStorage.setItem('versh_language', next) } catch {}
+      return next
+    })
+  }
+
+  useEffect(() => {
+    document.documentElement.lang = language
+    const originalText = new WeakMap<Text, string>()
+    const translateNode = (node: Node) => {
+      if (node.nodeType === Node.TEXT_NODE) {
+        const textNode = node as Text
+        if (!originalText.has(textNode)) originalText.set(textNode, textNode.nodeValue || '')
+        const original = originalText.get(textNode) || ''
+        const translated = translateTextNode(original, language)
+        if (textNode.nodeValue !== translated) textNode.nodeValue = translated
+      } else if (node.nodeType === Node.ELEMENT_NODE) {
+        const element = node as HTMLElement
+        if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+          const placeholder = element.getAttribute('placeholder')
+          if (placeholder) {
+            const entry = LANGUAGE_COPY[placeholder] || Object.values(LANGUAGE_COPY).find((item) => item.ru === placeholder || item.en === placeholder)
+            if (entry) element.setAttribute('placeholder', entry[language])
+          }
+        }
+        node.childNodes.forEach(translateNode)
+      }
+    }
+    translateNode(document.body)
+    const observer = new MutationObserver((records) => {
+      records.forEach((record) => {
+        if (record.type === 'characterData' && record.target.nodeType === Node.TEXT_NODE) {
+          const node = record.target as Text
+          const current = node.nodeValue || ''
+          const entry = Object.values(LANGUAGE_COPY).find((item) => item.ru === current.trim() || item.en === current.trim())
+          if (entry) {
+            const leading = current.match(/^\s*/)?.[0] ?? ''
+            const trailing = current.match(/\s*$/)?.[0] ?? ''
+            const desired = entry[language]
+            if (current.trim() !== desired) node.nodeValue = `${leading}${desired}${trailing}`
+          }
+        } else {
+          record.addedNodes.forEach(translateNode)
+        }
+      })
+    })
+    observer.observe(document.body, { subtree: true, childList: true, characterData: true })
+    return () => observer.disconnect()
+  }, [language])
+
   const cursor = useRef<HTMLDivElement>(null)
 
   const getProjectFromUrl = (): ProjectKey | null => {
@@ -784,6 +955,7 @@ export default function App() {
       return (
         <div className="site admin-page">
           <header className="nav admin-nav">
+            <LanguageSwitch language={language} onToggle={toggleLanguage} />
             <button className="case-logo" onClick={() => { window.history.pushState({}, '', window.location.pathname); setAdminMode(false) }}>VERSH<span>®</span></button>
             <span className="admin-nav-title">CONTENT MANAGER</span>
             <button className="case-back" onClick={() => { window.history.pushState({}, '', window.location.pathname); setAdminMode(false) }}>← BACK TO SITE</button>
@@ -820,6 +992,7 @@ export default function App() {
     return (
       <div className="site admin-page">
         <header className="nav admin-nav">
+          <LanguageSwitch language={language} onToggle={toggleLanguage} />
           <button className="case-logo" onClick={() => { window.history.pushState({}, '', window.location.pathname); setAdminMode(false) }}>VERSH<span>®</span></button>
           <span className="admin-nav-title">CONTENT MANAGER</span>
           <button className="case-back" onClick={() => { void logoutFromCMS() }}>LOG OUT</button>
@@ -956,7 +1129,7 @@ export default function App() {
     return (
       <div className="site case-page">
         <div className="cursor" ref={cursor}><span>BACK</span></div>
-        <header className="nav case-nav"><button className="case-logo" onClick={() => { window.history.pushState({}, '', window.location.pathname); setCustomProjectId(null) }}>VERSH<span>®</span></button><button className="case-back" onClick={() => { window.history.pushState({}, '', window.location.pathname); setCustomProjectId(null) }}>← BACK TO WORK</button></header>
+        <header className="nav case-nav"><LanguageSwitch language={language} onToggle={toggleLanguage} /><button className="case-logo" onClick={() => { window.history.pushState({}, '', window.location.pathname); setCustomProjectId(null) }}>VERSH<span>®</span></button><button className="case-back" onClick={() => { window.history.pushState({}, '', window.location.pathname); setCustomProjectId(null) }}>← BACK TO WORK</button></header>
         <main>
           <section className="case-hero case-custom">
             <div className="case-hero-top"><span>01 — {customProject.category}</span><span>{customProject.year}</span></div>
@@ -1011,6 +1184,8 @@ export default function App() {
         {/* NAVIGATION */}
 
         <header className="nav case-nav">
+
+          <LanguageSwitch language={language} onToggle={toggleLanguage} />
 
           <button
             className="case-logo"
@@ -1391,6 +1566,7 @@ export default function App() {
         </a>
 
         <div className="nav-right">
+          <LanguageSwitch language={language} onToggle={toggleLanguage} />
 
           <a href="#work">
             WORK
