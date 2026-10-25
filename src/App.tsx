@@ -291,7 +291,7 @@ const petDayImages = [
 ]
 
 
-// VERSH_LANGUAGE_PATCH_V1
+// VERSH_LANGUAGE_PATCH_V1m
 type SiteLanguage = 'ru' | 'en'
 
 const LANGUAGE_COPY: Record<string, { ru: string; en: string }> = {
