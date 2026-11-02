@@ -13,6 +13,7 @@
 .swiss-nav-links { display:flex; align-items:center; gap:34px; }
 .swiss-nav-links a,.swiss-lang { transition:color .2s ease; }
 .swiss-nav-links a:hover,.swiss-lang:hover { color:var(--versh-blue); }
+.swiss-nav-cta b { display:none; font-size:17px; font-weight:400; }
 .swiss-lang { border:0; background:none; color:inherit; font:inherit; padding:8px 0; }
 .swiss-nav-cta { color:var(--versh-blue)!important; }
 .swiss-hero { padding:clamp(75px,10vw,150px) 0 72px; }
@@ -41,6 +42,12 @@
 .swiss-project-visual { aspect-ratio:1.42/1; background:#deddd7; overflow:hidden; position:relative; }
 .swiss-project-visual img { display:block; width:100%; height:100%; object-fit:cover; transition:transform .65s cubic-bezier(.2,.7,.2,1); }
 .swiss-project:hover .swiss-project-visual img { transform:scale(1.035); }
+.swiss-project-index { position:absolute; z-index:1; top:15px; left:16px; display:grid; place-items:center; width:34px; height:34px; border-radius:50%; background:var(--versh-paper); color:var(--versh-ink); font:10px 'DM Mono',monospace; }
+.swiss-project-open { position:absolute; z-index:1; right:14px; bottom:14px; padding:10px 13px; background:var(--versh-blue); color:#fff; font:10px 'DM Mono',monospace; letter-spacing:.04em; opacity:0; transform:translateY(6px); transition:opacity .25s,transform .25s; }
+.swiss-project:hover .swiss-project-open,.swiss-project:focus-visible .swiss-project-open { opacity:1; transform:translateY(0); }
+.swiss-project-kristall .swiss-project-visual img { object-position:center 35%; }
+.swiss-project-atlant .swiss-project-visual img { object-position:center 28%; }
+.swiss-project-pet .swiss-project-visual img { object-position:center top; }
 .swiss-project-placeholder { width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:linear-gradient(135deg,#e2e0d9,#c9c8c1); color:rgba(23,25,29,.45); font:11px 'DM Mono',monospace; }
 .swiss-project-info { display:flex; justify-content:space-between; align-items:flex-start; gap:20px; padding-top:15px; }
 .swiss-project-name { font-size:clamp(22px,2.6vw,36px); line-height:1.05; letter-spacing:-.06em; font-weight:600; }
@@ -68,7 +75,9 @@
  .swiss-wrap { width:calc(100% - 36px); }
  .swiss-nav { height:68px; }
  .swiss-nav-links { gap:13px; font-size:9px; }
- .swiss-nav-links a:nth-child(2) { display:none; }
+ .swiss-nav-links a:nth-child(2),.swiss-nav-links a:nth-child(3) { display:none; }
+ .swiss-nav-cta span { display:none; }
+ .swiss-nav-cta b { display:inline; }
  .swiss-brand { font-size:24px; }
  .swiss-hero { padding:76px 0 52px; }
  .swiss-hero-top { margin-bottom:28px; }
@@ -87,5 +96,14 @@
  .swiss-contact h2 { margin:38px 0 42px; }
  .swiss-contact-bottom { align-items:flex-start; flex-direction:column; }
  .swiss-footer { flex-wrap:wrap; }
+}
+@media(max-width:390px) {
+ .swiss-wrap { width:calc(100% - 28px); }
+ .swiss-nav-links { gap:11px; font-size:8px; }
+ .swiss-nav { height:62px; }
+ .swiss-brand { font-size:22px; }
+ .swiss-hero h1 { font-size:clamp(48px,12.5vw,64px); }
+ .swiss-hero-index { max-width:125px; }
+ .swiss-project-name { font-size:24px; }
 }
 @media(prefers-reduced-motion:reduce) { .swiss-home *, .swiss-home *::before, .swiss-home *::after { scroll-behavior:auto!important; transition:none!important; } }
