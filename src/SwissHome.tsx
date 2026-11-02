@@ -26,16 +26,21 @@ const copy = {
     discuss: 'ОБСУДИТЬ ПРОЕКТ',
     works: 'СМОТРЕТЬ РАБОТЫ',
     selected: '01 — КЕЙСЫ',
+    aboutMeLabel: '02 — ОБО МНЕ',
+    aboutMeTitle: <>КОНСТАНТИН<br /><span>ВЕРШИНИН.</span></>,
+    aboutMeLead: 'Независимый дизайнер. Помогаю бизнесу находить свой визуальный язык и превращать идеи в цельные, продуманные решения.',
+    aboutMeText: 'В дизайне с 2022 года. Работаю с брендингом, сайтами, digital-продуктами и визуальными коммуникациями. В каждом проекте для меня важны не только эстетика, но и задача бизнеса: понять её, выстроить логику и довести решение до результата.',
+    aboutMeNote: '4+ ГОДА В ДИЗАЙНЕ · ОТ ИДЕИ ДО РЕАЛИЗАЦИИ',
     all: 'ВСЕ',
     web: 'WEB',
     branding: 'BRANDING',
     commerce: 'E-COMMERCE',
     other: 'OTHER',
-    aboutLabel: '02 — ПОДХОД',
+    aboutLabel: '03 — ПОДХОД',
     aboutTitle: 'ДИЗАЙН С ЦЕЛЬЮ.',
     aboutText: 'Я помогаю бизнесу превращать идеи и задачи в понятные визуальные решения. В работе соединяю стратегическое мышление, внимание к деталям и функциональный дизайн.',
     aboutNote: 'ОТ ПЕРВОГО БРИФА ДО ГОТОВОГО РЕШЕНИЯ',
-    servicesLabel: '03 — НАПРАВЛЕНИЯ',
+    servicesLabel: '04 — НАПРАВЛЕНИЯ',
     servicesTitle: 'ЧЕМ МОГУ БЫТЬ ПОЛЕЗЕН',
     services: [
       ['01', 'Брендинг и айдентика', 'Логотипы, фирменный стиль, визуальные системы и гайдлайны.'],
@@ -43,7 +48,7 @@ const copy = {
       ['03', 'E-commerce дизайн', 'Карточки товаров, контент для маркетплейсов и интернет-магазинов.'],
       ['04', 'Визуальные коммуникации', 'Презентации, рекламные материалы и графический дизайн.'],
     ],
-    contactLabel: '04 — КОНТАКТ',
+    contactLabel: '05 — КОНТАКТ',
     contactTitle: <>ЕСТЬ ЗАДАЧА?<br /><em>ДАВАЙТЕ ОБСУДИМ.</em></>,
     email: 'НАПИСАТЬ НА ПОЧТУ',
     footer: 'НЕЗАВИСИМЫЙ ДИЗАЙНЕР',
@@ -58,16 +63,21 @@ const copy = {
     discuss: 'START A PROJECT',
     works: 'EXPLORE WORK',
     selected: '01 — CASE STUDIES',
+    aboutMeLabel: '02 — ABOUT ME',
+    aboutMeTitle: <>KONSTANTIN<br /><span>VERSHININ.</span></>,
+    aboutMeLead: 'Independent designer. I help businesses find their visual language and turn ideas into thoughtful, cohesive solutions.',
+    aboutMeText: 'Working in design since 2022. My practice spans branding, websites, digital products and visual communication. I care not only about aesthetics, but also about the purpose behind every project: understanding the challenge, building a clear approach and bringing the solution to life.',
+    aboutMeNote: '4+ YEARS IN DESIGN · FROM IDEA TO DELIVERY',
     all: 'ALL',
     web: 'WEB',
     branding: 'BRANDING',
     commerce: 'E-COMMERCE',
     other: 'OTHER',
-    aboutLabel: '02 — APPROACH',
+    aboutLabel: '03 — APPROACH',
     aboutTitle: 'DESIGN WITH INTENT.',
     aboutText: 'I help businesses turn ideas and challenges into clear visual solutions, combining strategic thinking, attention to detail and functional design.',
     aboutNote: 'FROM FIRST BRIEF TO FINAL DELIVERY',
-    servicesLabel: '03 — SERVICES',
+    servicesLabel: '04 — SERVICES',
     servicesTitle: 'HOW I CAN HELP',
     services: [
       ['01', 'Branding & identity', 'Logos, visual identity, design systems and guidelines.'],
@@ -75,7 +85,7 @@ const copy = {
       ['03', 'E-commerce design', 'Product cards, marketplace content and online store visuals.'],
       ['04', 'Visual communication', 'Presentations, advertising materials and graphic design.'],
     ],
-    contactLabel: '04 — CONTACT',
+    contactLabel: '05 — CONTACT',
     contactTitle: <>HAVE A PROJECT?<br /><em>LET’S TALK.</em></>,
     email: 'SEND AN EMAIL',
     footer: 'INDEPENDENT DESIGNER',
@@ -158,10 +168,15 @@ export default function SwissHome({ language, onToggleLanguage, projects }: Prop
       <hr className="swiss-rule" />
       <section className="swiss-section" id="swiss-about">
         <div className="swiss-wrap">
-          <div className="swiss-section-head swiss-kicker"><span>{t.aboutLabel}</span><span>VERSH®</span></div>
-          <div className="swiss-about">
-            <h2 className="swiss-section-title">{t.aboutTitle}</h2>
-            <div className="swiss-about-copy"><p>{t.aboutText}</p><div className="swiss-about-note">{t.aboutNote}</div></div>
+          <div className="swiss-section-head swiss-kicker"><span>{t.aboutMeLabel}</span><span>VERSH®</span></div>
+          <div className="swiss-about-me">
+            <div className="swiss-about-photo"><img src="/images/konstantin-portrait.jpg" alt="Константин Вершинин — независимый дизайнер" /></div>
+            <div className="swiss-about-me-content">
+              <h2>{t.aboutMeTitle}</h2>
+              <p className="swiss-about-lead">{t.aboutMeLead}</p>
+              <p className="swiss-about-description">{t.aboutMeText}</p>
+              <div className="swiss-about-me-note">{t.aboutMeNote}</div>
+            </div>
           </div>
         </div>
       </section>
@@ -186,7 +201,7 @@ export default function SwissHome({ language, onToggleLanguage, projects }: Prop
           <div className="swiss-kicker">{t.contactLabel}</div>
           <h2>{t.contactTitle}</h2>
           <div className="swiss-contact-bottom">
-            <a className="swiss-contact-mail" href="mailto:konstantinversh@icloud.com">konstantinversh@icloud.com ↗</a>
+            <div className="swiss-contact-links"><a className="swiss-contact-mail" href="mailto:konstantinversh@icloud.com">konstantinversh@icloud.com ↗</a><a className="swiss-contact-mail" href="https://t.me/KV252525" target="_blank" rel="noreferrer">TELEGRAM @KV252525 ↗</a></div>
             <a className="swiss-button" href="mailto:konstantinversh@icloud.com?subject=VERSH%20%E2%80%94%20Project%20inquiry">{t.email}</a>
           </div>
         </div>
