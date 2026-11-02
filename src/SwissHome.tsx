@@ -104,7 +104,7 @@ export default function SwissHome({ language, onToggleLanguage, projects }: Prop
   ]
 
   return (
-    <div className="swiss-home">
+    <div className="swiss-home" id="swiss-home-top">
       <div className="swiss-wrap">
         <header className="swiss-nav">
           <a className="swiss-brand" href="/" aria-label="VERSH home">VERSH<sup>®</sup></a>
@@ -192,7 +192,7 @@ export default function SwissHome({ language, onToggleLanguage, projects }: Prop
         </div>
       </section>
       <footer className="swiss-wrap swiss-footer">
-        <span>© 2026 VERSH®</span><span>{t.footer}</span><a href="#top" onClick={(event) => { event.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }) }}>{t.top}</a>
+        <span>© 2026 VERSH®</span><span>{t.footer}</span><a href="#swiss-home-top" onClick={(event) => { event.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }) }}>{t.top}</a>
       </footer>
     </div>
   )
