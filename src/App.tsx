@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
+import SwissHome from './SwissHome'
 
 import kristallHome from './assets/kristall-home.png'
 import kristallShops from './assets/kristall-shops.png'
@@ -1680,6 +1681,28 @@ export default function App() {
    * HOME PAGE
    * =========================================================
    */
+
+  if (!projectKey && !customProjectId && !adminMode) {
+    const homeProjects = [
+      ...projects.map((project) => ({
+        id: project.cls,
+        title: project.title,
+        type: project.type,
+        year: project.year,
+        image: project.image,
+        onOpen: () => openCase(project.cls === 'crystal' ? 'crystal' : project.cls === 'atlant' ? 'atlant' : 'pet'),
+      })),
+      ...storedProjects.map((project) => ({
+        id: project.id,
+        title: project.title,
+        type: project.type || project.category,
+        year: project.year,
+        image: project.images?.[0]?.src || '',
+        onOpen: () => openCustomCase(project.id),
+      })),
+    ]
+    return <SwissHome language={language} onToggleLanguage={toggleLanguage} projects={homeProjects} />
+  }
 
   return (
 
