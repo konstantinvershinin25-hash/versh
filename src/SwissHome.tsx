@@ -112,7 +112,7 @@ export default function SwissHome({ language, onToggleLanguage, projects }: Prop
             <a href="#swiss-work">{language === 'ru' ? 'РАБОТЫ' : 'WORK'}</a>
             <a href="#swiss-about">{language === 'ru' ? 'ОБО МНЕ' : 'ABOUT'}</a>
             <a href="#swiss-services">{language === 'ru' ? 'УСЛУГИ' : 'SERVICES'}</a>
-            <a className="swiss-nav-cta" href="#swiss-contact">{language === 'ru' ? 'СВЯЗАТЬСЯ ↗' : 'CONTACT ↗'}</a>
+            <a className="swiss-nav-cta" href="#swiss-contact"><span>{language === 'ru' ? 'СВЯЗАТЬСЯ' : 'CONTACT'}</span><b aria-hidden="true">↗</b></a>
             <button className="swiss-lang" type="button" onClick={onToggleLanguage}>{language === 'ru' ? 'RU / EN' : 'EN / RU'}</button>
           </nav>
         </header>
@@ -142,8 +142,8 @@ export default function SwissHome({ language, onToggleLanguage, projects }: Prop
           </div>
           <div className="swiss-project-grid">
             {visibleProjects.map((project, index) => (
-              <button className="swiss-project" key={project.id} type="button" onClick={project.onOpen} aria-label={`${t.view}: ${project.title}`}>
-                <div className="swiss-project-visual">
+              <button className={`swiss-project swiss-project-${project.id}`} key={project.id} type="button" onClick={project.onOpen} aria-label={`${t.view}: ${project.title}`}>
+                <div className="swiss-project-visual"><span className="swiss-project-index">{String(index + 1).padStart(2, '0')}</span><span className="swiss-project-open">{t.view} ↗</span>
                   {project.image ? <img src={project.image} alt={project.title} loading={index > 1 ? 'lazy' : 'eager'} /> : <div className="swiss-project-placeholder">VERSH® / SELECTED WORK</div>}
                 </div>
                 <div className="swiss-project-info">
