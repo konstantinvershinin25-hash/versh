@@ -181,6 +181,16 @@ export default function SwissHome({ language, onToggleLanguage, projects }: Prop
         </div>
       </section>
       <hr className="swiss-rule" />
+      <section className="swiss-section" id="swiss-approach">
+        <div className="swiss-wrap">
+          <div className="swiss-section-head swiss-kicker"><span>{t.aboutLabel}</span><span>VERSH®</span></div>
+          <div className="swiss-about">
+            <h2 className="swiss-section-title">{t.aboutTitle}</h2>
+            <div className="swiss-about-copy"><p>{t.aboutText}</p><div className="swiss-about-note">{t.aboutNote}</div></div>
+          </div>
+        </div>
+      </section>
+      <hr className="swiss-rule" />
       <section className="swiss-section" id="swiss-services">
         <div className="swiss-wrap">
           <div className="swiss-section-head swiss-kicker"><span>{t.servicesLabel}</span><span>04</span></div>
