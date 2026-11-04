@@ -41,7 +41,7 @@ const copy = {
     aboutTitle: 'ДИЗАЙН С ЦЕЛЬЮ.',
     aboutText: 'Я помогаю бизнесу превращать идеи и задачи в понятные визуальные решения. В работе соединяю стратегическое мышление, внимание к деталям и функциональный дизайн.',
     aboutNote: 'ОТ ПЕРВОГО БРИФА ДО ГОТОВОГО РЕШЕНИЯ',
-    servicesLabel: '04 — НАПРАВЛЕНИЯ',
+    servicesLabel: '03 — НАПРАВЛЕНИЯ',
     servicesTitle: 'ЧЕМ МОГУ БЫТЬ ПОЛЕЗЕН',
     services: [
       ['01', 'Брендинг и айдентика', 'Логотипы, фирменный стиль, визуальные системы и гайдлайны.'],
@@ -49,7 +49,7 @@ const copy = {
       ['03', 'E-commerce дизайн', 'Карточки товаров, контент для маркетплейсов и интернет-магазинов.'],
       ['04', 'Визуальные коммуникации', 'Презентации, рекламные материалы и графический дизайн.'],
     ],
-    contactLabel: '05 — КОНТАКТ',
+    contactLabel: '04 — КОНТАКТ',
     contactTitle: <>ЕСТЬ ЗАДАЧА?<br /><em>ДАВАЙТЕ ОБСУДИМ.</em></>,
     email: 'НАПИСАТЬ НА ПОЧТУ',
     footer: 'НЕЗАВИСИМЫЙ ДИЗАЙНЕР',
@@ -78,7 +78,7 @@ const copy = {
     aboutTitle: 'DESIGN WITH INTENT.',
     aboutText: 'I help businesses turn ideas and challenges into clear visual solutions, combining strategic thinking, attention to detail and functional design.',
     aboutNote: 'FROM FIRST BRIEF TO FINAL DELIVERY',
-    servicesLabel: '04 — SERVICES',
+    servicesLabel: '03 — SERVICES',
     servicesTitle: 'HOW I CAN HELP',
     services: [
       ['01', 'Branding & identity', 'Logos, visual identity, design systems and guidelines.'],
@@ -86,7 +86,7 @@ const copy = {
       ['03', 'E-commerce design', 'Product cards, marketplace content and online store visuals.'],
       ['04', 'Visual communication', 'Presentations, advertising materials and graphic design.'],
     ],
-    contactLabel: '05 — CONTACT',
+    contactLabel: '04 — CONTACT',
     contactTitle: <>HAVE A PROJECT?<br /><em>LET’S TALK.</em></>,
     email: 'SEND AN EMAIL',
     footer: 'INDEPENDENT DESIGNER',
@@ -145,21 +145,6 @@ export default function SwissHome({ language, onToggleLanguage, projects }: Prop
         </main>
       </div>
       <hr className="swiss-rule" />
-      <section className="swiss-section" id="swiss-about">
-        <div className="swiss-wrap">
-          <div className="swiss-section-head swiss-kicker"><span>{t.aboutMeLabel}</span><span>VERSH®</span></div>
-          <div className="swiss-about-me">
-            <div className="swiss-about-photo"><img src={portrait} alt="Константин Вершинин — независимый дизайнер" /></div>
-            <div className="swiss-about-me-content">
-              <h2>{t.aboutMeTitle}</h2>
-              <p className="swiss-about-lead">{t.aboutMeLead}</p>
-              <p className="swiss-about-description">{t.aboutMeText}</p>
-              <div className="swiss-about-me-note">{t.aboutMeNote}</div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <hr className="swiss-rule" />
       <section className="swiss-section" id="swiss-work">
         <div className="swiss-wrap">
           <div className="swiss-section-head swiss-kicker"><span>{t.selected}</span><span>({String(projects.length).padStart(2, '0')})</span></div>
@@ -182,12 +167,17 @@ export default function SwissHome({ language, onToggleLanguage, projects }: Prop
         </div>
       </section>
       <hr className="swiss-rule" />
-      <section className="swiss-section" id="swiss-approach">
+      <section className="swiss-section" id="swiss-about">
         <div className="swiss-wrap">
-          <div className="swiss-section-head swiss-kicker"><span>{t.aboutLabel}</span><span>VERSH®</span></div>
-          <div className="swiss-about">
-            <h2 className="swiss-section-title">{t.aboutTitle}</h2>
-            <div className="swiss-about-copy"><p>{t.aboutText}</p><div className="swiss-about-note">{t.aboutNote}</div></div>
+          <div className="swiss-section-head swiss-kicker"><span>{t.aboutMeLabel}</span><span>VERSH®</span></div>
+          <div className="swiss-about-me">
+            <div className="swiss-about-photo"><img src={portrait} alt="Константин Вершинин — независимый дизайнер" /></div>
+            <div className="swiss-about-me-content">
+              <h2>{t.aboutMeTitle}</h2>
+              <p className="swiss-about-lead">{t.aboutMeLead}</p>
+              <p className="swiss-about-description">{t.aboutMeText}</p>
+              <div className="swiss-about-me-note">{t.aboutMeNote}</div>
+            </div>
           </div>
         </div>
       </section>
