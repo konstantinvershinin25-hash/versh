@@ -144,6 +144,21 @@ export default function SwissHome({ language, onToggleLanguage, projects }: Prop
         </main>
       </div>
       <hr className="swiss-rule" />
+      <section className="swiss-section" id="swiss-about">
+        <div className="swiss-wrap">
+          <div className="swiss-section-head swiss-kicker"><span>{t.aboutMeLabel}</span><span>VERSH®</span></div>
+          <div className="swiss-about-me">
+            <div className="swiss-about-photo"><img src="/images/konstantin-portrait.jpg" alt="Константин Вершинин — независимый дизайнер" /></div>
+            <div className="swiss-about-me-content">
+              <h2>{t.aboutMeTitle}</h2>
+              <p className="swiss-about-lead">{t.aboutMeLead}</p>
+              <p className="swiss-about-description">{t.aboutMeText}</p>
+              <div className="swiss-about-me-note">{t.aboutMeNote}</div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <hr className="swiss-rule" />
       <section className="swiss-section" id="swiss-work">
         <div className="swiss-wrap">
           <div className="swiss-section-head swiss-kicker"><span>{t.selected}</span><span>({String(projects.length).padStart(2, '0')})</span></div>
@@ -162,21 +177,6 @@ export default function SwissHome({ language, onToggleLanguage, projects }: Prop
                 </div>
               </button>
             ))}
-          </div>
-        </div>
-      </section>
-      <hr className="swiss-rule" />
-      <section className="swiss-section" id="swiss-about">
-        <div className="swiss-wrap">
-          <div className="swiss-section-head swiss-kicker"><span>{t.aboutMeLabel}</span><span>VERSH®</span></div>
-          <div className="swiss-about-me">
-            <div className="swiss-about-photo"><img src="/images/konstantin-portrait.jpg" alt="Константин Вершинин — независимый дизайнер" /></div>
-            <div className="swiss-about-me-content">
-              <h2>{t.aboutMeTitle}</h2>
-              <p className="swiss-about-lead">{t.aboutMeLead}</p>
-              <p className="swiss-about-description">{t.aboutMeText}</p>
-              <div className="swiss-about-me-note">{t.aboutMeNote}</div>
-            </div>
           </div>
         </div>
       </section>
