@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import './swiss-home.css'
-import portrait from '../konstantin-portrait.jpg'
+import heroPortrait from '../hero-portrait.jpeg'
+import aboutPortrait from '../about-portrait.jpeg'
 
 type Language = 'ru' | 'en'
 type HomeProject = { id:string; title:string; type:string; category:string; year:string; image?:string; onOpen:()=>void }
@@ -57,14 +58,14 @@ export default function SwissHome({language,onToggleLanguage,projects,onOpenAll,
      <div className="neon-hero-buttons"><a className="neon-button" href="#swiss-contact">{t('Обсудить проект','Discuss project')} <span>→</span></a><a className="neon-play" href="#swiss-work"><b>▶</b><span>{t('Посмотреть','Explore')}<br/>{t('кейсы','projects')}</span></a></div>
      <div className="neon-benefits"><span><Icon name="bolt"/><small>{t('Быстро и качественно','Fast & reliable')}</small></span><span><Icon name="diamond"/><small>{t('С вниманием к деталям','Attention to detail')}</small></span><span><Icon name="chart"/><small>{t('Ориентирован на результат','Result focused')}</small></span></div>
     </div>
-    <div className="neon-hero-person"><div className="neon-code-card">〈 / 〉</div><div className="neon-glass-card">DIGITAL<br/>EXPERIENCE</div><img src={portrait} alt="Константин Вершинин"/></div>
+    <div className="neon-hero-person"><div className="neon-code-card">〈 / 〉</div><div className="neon-glass-card">DIGITAL<br/>EXPERIENCE</div><img src={heroPortrait} alt="Константин Вершинин"/></div>
    </section>
    <section className="neon-work" id="swiss-work">
     <div className="neon-section-intro"><div className="neon-eyebrow">● {t('Кейсы','Selected work')}</div><h2>{t('Мои работы','My work')}</h2><p>{t('Реализую проекты в разных нишах: от лендингов до интернет-магазинов','Projects across different industries — from landing pages to online stores')}</p><button className="neon-outline" type="button" onClick={onOpenAll}>{t('Все кейсы','All projects')} <span>→</span></button></div>
     <div className="neon-projects">{projects.slice(0,3).map((project,i)=><button className="neon-project" key={project.id} onClick={project.onOpen}><div className="neon-project-image">{project.image?<img src={project.image} alt={project.title}/>:<span>KV / SELECTED WORK</span>}<small>{i===0?'WEB':i===1?'DIGITAL':'CAMPAIGN'}</small></div><strong>{project.title}</strong><span>{project.type} · {project.year}<b>↗</b></span></button>)}</div>
    </section>
    <section className="neon-about" id="swiss-about">
-    <div className="neon-about-photo"><img src={portrait} alt="Константин Вершинин"/><span>{t('Делаю сайты с душой ♡','Designing with care ♡')}</span></div>
+    <div className="neon-about-photo"><img src={aboutPortrait} alt="Константин Вершинин"/><span>{t('Делаю сайты с душой ♡','Designing with care ♡')}</span></div>
     <div className="neon-about-copy"><div className="neon-eyebrow">● {t('Обо мне','About me')}</div><h2>{t('Мне 25 лет.','I am 25.')}<br/>{t('Я веб-дизайнер','I am a web designer')}</h2><p>{t('Уже 3 года создаю сайты, которые помогают бизнесу расти. Люблю дизайн, технологии и эстетику в деталях.','Since 2022, I have been creating websites that help businesses grow. I love design, technology and thoughtful details.')}</p><a className="neon-outline" href="https://t.me/KV252525" target="_blank" rel="noreferrer">{t('Узнать больше','Get in touch')} →</a></div>
      <div className="neon-values"><div><b className="neon-value-icon"><ValueIcon type="spark"/></b><span>{t('Делаю дизайн, который работает','Design that works')}</span></div><div><b className="neon-value-icon"><ValueIcon type="layers"/></b><span>{t('Погружаюсь в ваш бизнес и задачи','Focused on your business')}</span></div><div><b className="neon-value-icon"><ValueIcon type="target"/></b><span>{t('Ценю качество и довожу до результата','Quality from start to finish')}</span></div></div>
    </section>
