@@ -76,3 +76,7 @@
 .neon-service>b svg{width:25px;height:25px;fill:none;stroke:currentColor;stroke-width:1.55;stroke-linecap:round;stroke-linejoin:round;overflow:visible;filter:drop-shadow(0 0 5px #b66aff55);transition:transform .35s ease,filter .35s ease}
 .neon-service:hover>b{transform:translateY(-2px);border-color:#c58aff;box-shadow:inset 0 0 18px #a855f733,0 0 20px #a855f744}
 .neon-service:hover>b svg{transform:scale(1.08);filter:drop-shadow(0 0 8px #c77dff99)}
+
+/* Uploaded personal portraits */
+.neon-hero-person img{object-fit:contain;object-position:center bottom;border-radius:22px 22px 0 0;filter:drop-shadow(0 0 34px #9a42ff66)}
+.neon-about-photo img{object-fit:cover;object-position:center 18%;background:#f5f3f7}
