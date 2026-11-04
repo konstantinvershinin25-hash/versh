@@ -60,3 +60,13 @@
 .neon-section-intro>button.neon-outline:hover{background:#a855f722}
 @media(max-width:800px){.neon-hero{min-height:660px}.neon-service{min-height:86px;padding:14px}.neon-about{padding-top:45px;padding-bottom:45px}}
 @media(max-width:520px){.neon-service{min-height:82px}.neon-service>b{width:40px;height:40px}.neon-service>b svg{width:23px;height:23px}.neon-process{gap:24px}}
+
+/* Signature SVG value cards */
+.neon-values>div{display:flex;align-items:center;gap:15px;min-height:78px;padding:14px 17px;border:1px solid #ffffff16;border-radius:17px;background:linear-gradient(115deg,#1b1425 0%,#100d16 100%);transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease}
+.neon-values>div:hover{transform:translateX(4px);border-color:#a855f788;box-shadow:0 0 24px #a855f722}
+.neon-value-icon{width:48px;height:48px;flex:0 0 48px;display:grid;place-items:center;border:1px solid #9c59c866;border-radius:14px;background:radial-gradient(circle at 35% 25%,#c77dff3d,transparent 72%),#21142f;color:#d4a2ff;box-shadow:inset 0 0 16px #a855f722,0 0 15px #a855f71c}
+.neon-value-icon svg{width:25px;height:25px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;overflow:visible;filter:drop-shadow(0 0 5px #b66aff55);transition:transform .35s ease,filter .35s ease}
+.neon-values>div:hover .neon-value-icon svg{transform:scale(1.09);filter:drop-shadow(0 0 8px #c77dff99)}
+.neon-value-icon svg path,.neon-value-icon svg circle{stroke-dasharray:100;stroke-dashoffset:0}
+@media(prefers-reduced-motion:no-preference){.neon-values>div:hover .neon-value-icon svg path{animation:value-icon-draw .7s ease both}@keyframes value-icon-draw{from{stroke-dashoffset:35}to{stroke-dashoffset:0}}}
+@media(max-width:520px){.neon-values>div{min-height:70px;padding:11px 13px;gap:12px}.neon-value-icon{width:42px;height:42px;flex-basis:42px}.neon-value-icon svg{width:23px;height:23px}}
