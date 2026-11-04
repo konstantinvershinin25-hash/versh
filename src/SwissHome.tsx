@@ -22,7 +22,17 @@ function ValueIcon({type}:{type:'spark'|'layers'|'target'}) {
  return <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><path d="M12 2v3M12 19v3"/></svg>
 }
 function TelegramIcon(){return <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.4 3.2 18.2 20c-.2 1.2-.9 1.5-1.8 1l-5-3.7-2.4 2.3c-.3.3-.6.6-1.2.6l.4-5.1 9.3-8.4c.4-.4-.1-.6-.6-.3L5.4 13.6.5 12c-1.1-.3-1.1-1 .2-1.5L19.8 3c.9-.3 1.7.2 1.6.2Z" fill="currentColor"/></svg>}
-function Icon({name}:{name:string}){const paths:Record<string,string>={bolt:'M13 2 4 13h6l-1 9 9-12h-6l1-8Z',diamond:'m12 2 9 6-9 14L3 8l9-6Zm-9 6h18M8 8l4 14 4-14M8 2l4 6 4-6',chart:'M4 19V9m8 10V4m8 15v-7M2 19h20',heart:'M20.8 8.8c0 5.2-8.8 11-8.8 11S3.2 14 3.2 8.8A4.7 4.7 0 0 1 12 6.1a4.7 4.7 0 0 1 8.8 2.7Z',monitor:'M3 4h18v13H3zM8 21h8m-4-4v4',refresh:'M20 7V3l-4 4m-12 10v4l4-4m-3-6a8 8 0 0 1 13-4l2 2M4 17l2 2a8 8 0 0 0 13-4',bag:'M4 8h16l-1 13H5L4 8Zm4 0V6a4 4 0 0 1 8 0v2',phone:'M7 2h10v20H7zM10 18h4',gear:'M12 3v3m0 12v3M3 12h3m12 0h3M5.6 5.6l2.1 2.1m8.6 8.6 2.1 2.1m0-12.8-2.1 2.1m-8.6 8.6-2.1 2.1M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z'};return <svg viewBox="0 0 24 24" aria-hidden="true"><path d={paths[name]||paths.diamond}/></svg>}
+function Icon({name}:{name:string}){
+ const paths:Record<string,string[]> = {
+  monitor:['M3 4.5h18v13H3z','M8 21h8','M12 17.5V21','M7 8h4','M7 11h10'],
+  refresh:['M20 7V3l-4 4','M20 7h-5','M4 17v4l4-4','M4 17h5','M5.2 10a7.5 7.5 0 0 1 12.5-4.5L20 7','M18.8 14a7.5 7.5 0 0 1-12.5 4.5L4 17'],
+  bag:['M3 8h18l-1.5 13h-15L3 8Z','M8 9V6a4 4 0 0 1 8 0v3','M8 13v1','M16 13v1'],
+  chart:['M4 19V9','M12 19V4','M20 19v-7','M2 21h20','M4 6l5-3 4 3 7-4'],
+  phone:['M7 2.5h10v19H7z','M10 5.5h4','M10 18.5h4','M9 9h6v5H9z'],
+  gear:['M12 3v2','M12 19v2','M3 12h2','M19 12h2','m5.6 5.6 1.4 1.4','m17 17 1.4 1.4','m18.4 5.6-1.4 1.4','m7 17-1.4 1.4','M16.5 12a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0Z']
+ };
+ return <svg viewBox="0 0 24 24" aria-hidden="true">{(paths[name]||paths.monitor).map((d,i)=><path key={i} d={d}/>)}</svg>
+}
 export default function SwissHome({language,onToggleLanguage,projects,onOpenAll,onOpenCategory}:Props) {
  const cursorRef=useRef<HTMLDivElement>(null)
  const [cursorActive,setCursorActive]=useState(false)
