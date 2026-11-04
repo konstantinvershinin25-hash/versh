@@ -160,9 +160,9 @@ textarea {
   height: 6px;
 
   border-radius: 50%;
-  background: #b9ff4a;
+  background: #a855f7;
 
-  box-shadow: 0 0 14px rgba(185, 255, 74, 0.7);
+  box-shadow: 0 0 14px rgba(168, 85, 247, 0.7);
 
   animation: pulse 2s infinite;
 }
@@ -320,7 +320,7 @@ textarea {
 }
 
 .dot {
-  color: #b9ff4a;
+  color: #a855f7;
 }
 
 .hero-bottom {
@@ -519,7 +519,7 @@ textarea {
   flex-direction: column;
   gap: 4px;
 
-  background: #b9ff4a;
+  background: #a855f7;
   color: #080808;
 
   opacity: 0;
@@ -1041,8 +1041,8 @@ footer {
 .cursor.cursor-project {
   width: 82px;
   height: 82px;
-  background: #b9ff4a;
-  border-color: #b9ff4a;
+  background: #a855f7;
+  border-color: #a855f7;
   color: #080808;
 }
 
@@ -2668,7 +2668,7 @@ footer {
 
 .case-premium em {
   font-style: normal;
-  color: #5965d8;
+  color: #a855f7;
 }
 
 .case-premium .case-intro-grid p {
@@ -2851,7 +2851,7 @@ footer {
 }
 
 .case-premium .case-next button span {
-  color: #5965d8;
+  color: #a855f7;
 }
 
 .case-premium .case-footer {
