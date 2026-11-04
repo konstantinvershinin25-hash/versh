@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import SwissHome from './SwissHome'
+import PortfolioPages from './PortfolioPages'
+import { PROJECT_CATEGORIES, categorySlug } from './projectCategories'
 
 import kristallHome from './assets/kristall-home.png'
 import kristallShops from './assets/kristall-shops.png'
@@ -598,6 +600,8 @@ export default function App() {
 
   const [projectKey, setProjectKey] =
     useState<ProjectKey | null>(getProjectFromUrl)
+  const [portfolioMode, setPortfolioMode] = useState<'all'|'category'|null>(() => { const p=new URLSearchParams(window.location.search); return p.has('category')?'category':p.get('work')==='1'?'all':null })
+  const [portfolioCategory, setPortfolioCategory] = useState(() => new URLSearchParams(window.location.search).get('category') || '')
 
   const [storedProjects, setStoredProjects] = useState<StoredProject[]>([])
   const [adminMode, setAdminMode] = useState(() => new URLSearchParams(window.location.search).get('admin') === '1')
@@ -631,6 +635,8 @@ export default function App() {
     const handlePopState = () => {
       const params = new URLSearchParams(window.location.search)
       setProjectKey(getProjectFromUrl())
+      setPortfolioMode(params.has('category')?'category':params.get('work')==='1'?'all':null)
+      setPortfolioCategory(params.get('category') || '')
       setCustomProjectId(params.get('custom'))
       setAdminMode(params.get('admin') === '1')
     }
@@ -743,6 +749,22 @@ export default function App() {
       top: 0,
       behavior: 'instant',
     })
+  }
+
+  const openPortfolio = () => {
+    window.history.pushState({}, '', '?work=1')
+    setPortfolioMode('all'); setPortfolioCategory(''); setProjectKey(null); setCustomProjectId(null)
+    window.scrollTo({ top: 0, behavior: 'instant' })
+  }
+  const openCategory = (slug: string) => {
+    window.history.pushState({}, '', '?category=' + encodeURIComponent(slug))
+    setPortfolioMode('category'); setPortfolioCategory(slug); setProjectKey(null); setCustomProjectId(null)
+    window.scrollTo({ top: 0, behavior: 'instant' })
+  }
+  const closePortfolio = () => {
+    window.history.pushState({}, '', window.location.pathname)
+    setPortfolioMode(null); setPortfolioCategory('')
+    window.scrollTo({ top: 0, behavior: 'instant' })
   }
 
   const closeCase = () => {
@@ -1137,7 +1159,7 @@ export default function App() {
               <label>TITLE<input value={adminTitle} onChange={(e) => setAdminTitle(e.target.value)} placeholder="PROJECT NAME" /></label>
               <div className="admin-form-row">
                 <label>TYPE<input value={adminType} onChange={(e) => setAdminType(e.target.value)} /></label>
-                <label>CATEGORY<input value={adminCategory} onChange={(e) => setAdminCategory(e.target.value)} /></label>
+                <label>CATEGORY<select value={categorySlug(adminCategory)} onChange={(e) => setAdminCategory(e.target.value)}>{PROJECT_CATEGORIES.map((item) => <option key={item.slug} value={item.slug}>{item.label}</option>)}</select></label>
                 <label>YEAR<input value={adminYear} onChange={(e) => setAdminYear(e.target.value)} /></label>
               </div>
               <label>DESCRIPTION<textarea value={adminDescription} onChange={(e) => setAdminDescription(e.target.value)} rows={5} /></label>
@@ -1242,6 +1264,23 @@ export default function App() {
         </main>
       </div>
     )
+  }
+
+  if (portfolioMode) {
+    const catalogProjects = [
+      ...projects.map((project) => ({
+        id: project.cls, title: project.title, type: project.type,
+        category: project.cls === 'pet' ? 'digital' : 'web-design',
+        year: project.year, image: project.image,
+        onOpen: () => openCase(project.cls === 'crystal' ? 'crystal' : project.cls === 'atlant' ? 'atlant' : 'pet'),
+      })),
+      ...storedProjects.map((project) => ({
+        id: project.id, title: project.title, type: project.type || project.category,
+        category: categorySlug(project.category || project.type), year: project.year,
+        image: project.images?.[0]?.src || '', onOpen: () => openCustomCase(project.id),
+      })),
+    ]
+    return <PortfolioPages language={language} mode={portfolioMode} category={portfolioCategory} projects={catalogProjects} onBack={closePortfolio} />
   }
 
   const customProject = storedProjects.find((item) => item.id === customProjectId)
@@ -1688,6 +1727,7 @@ export default function App() {
         id: project.cls,
         title: project.title,
         type: project.type,
+        category: project.cls === 'pet' ? 'digital' : 'web-design',
         year: project.year,
         image: project.image,
         onOpen: () => openCase(project.cls === 'crystal' ? 'crystal' : project.cls === 'atlant' ? 'atlant' : 'pet'),
@@ -1696,12 +1736,13 @@ export default function App() {
         id: project.id,
         title: project.title,
         type: project.type || project.category,
+        category: categorySlug(project.category || project.type),
         year: project.year,
         image: project.images?.[0]?.src || '',
         onOpen: () => openCustomCase(project.id),
       })),
     ]
-    return <SwissHome language={language} onToggleLanguage={toggleLanguage} projects={homeProjects} />
+    return <SwissHome language={language} onToggleLanguage={toggleLanguage} projects={homeProjects} onOpenAll={openPortfolio} onOpenCategory={openCategory} />
   }
 
   return (
