@@ -70,3 +70,9 @@
 .neon-value-icon svg path,.neon-value-icon svg circle{stroke-dasharray:100;stroke-dashoffset:0}
 @media(prefers-reduced-motion:no-preference){.neon-values>div:hover .neon-value-icon svg path{animation:value-icon-draw .7s ease both}@keyframes value-icon-draw{from{stroke-dashoffset:35}to{stroke-dashoffset:0}}}
 @media(max-width:520px){.neon-values>div{min-height:70px;padding:11px 13px;gap:12px}.neon-value-icon{width:42px;height:42px;flex-basis:42px}.neon-value-icon svg{width:23px;height:23px}}
+
+/* Matching icon treatment for all six service categories */
+.neon-service>b{width:48px;height:48px;flex:0 0 48px;display:grid;place-items:center;border:1px solid #9c59c866;border-radius:14px;background:radial-gradient(circle at 35% 25%,#c77dff3d,transparent 72%),#21142f;color:#d4a2ff;box-shadow:inset 0 0 16px #a855f722,0 0 15px #a855f71c;transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease}
+.neon-service>b svg{width:25px;height:25px;fill:none;stroke:currentColor;stroke-width:1.55;stroke-linecap:round;stroke-linejoin:round;overflow:visible;filter:drop-shadow(0 0 5px #b66aff55);transition:transform .35s ease,filter .35s ease}
+.neon-service:hover>b{transform:translateY(-2px);border-color:#c58aff;box-shadow:inset 0 0 18px #a855f733,0 0 20px #a855f744}
+.neon-service:hover>b svg{transform:scale(1.08);filter:drop-shadow(0 0 8px #c77dff99)}
