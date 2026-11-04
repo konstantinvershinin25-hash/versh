@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import './swiss-home.css'
-import heroPortrait from '../hero-portrait.jpeg'
-import aboutPortrait from '../about-portrait.jpeg'
+import heroPortrait from '../hero-portrait.png'
+import aboutPortrait from '../about-portrait.png'
 
 type Language = 'ru' | 'en'
 type HomeProject = { id:string; title:string; type:string; category:string; year:string; image?:string; onOpen:()=>void }
