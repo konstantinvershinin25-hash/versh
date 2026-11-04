@@ -15,3 +15,48 @@
 .neon-cursor.is-active{width:58px;height:58px;background:#d9adff;box-shadow:0 0 20px #a855f7,0 0 50px #a855f799}
 .neon-cursor.is-active span{opacity:1}
 @media(pointer:coarse){.swiss-home,.swiss-home a,.swiss-home button{cursor:auto}.neon-cursor{display:none}}
+
+/* Refined editorial typography, rhythm and icon treatment */
+.swiss-home{font-family:Manrope,Inter,Arial,sans-serif;letter-spacing:-.012em}
+.swiss-home p{letter-spacing:-.018em}
+.neon-nav{height:82px}
+.neon-nav nav{gap:clamp(18px,2.5vw,38px);font-size:12px;letter-spacing:-.02em}
+.neon-hero{min-height:600px;padding-top:36px;padding-bottom:56px}
+.neon-hero h1{font-size:clamp(48px,5.6vw,82px);line-height:.94;letter-spacing:-.075em}
+.neon-hero-copy>p{font-size:clamp(15px,1.15vw,17px);line-height:1.6;max-width:440px}
+.neon-work{padding-top:44px;padding-bottom:56px;gap:clamp(28px,3.5vw,52px)}
+.neon-section-intro h2,.neon-about-copy h2,.neon-process h2{letter-spacing:-.065em;line-height:1.02}
+.neon-projects{gap:18px}
+.neon-project{border-radius:18px;padding-bottom:15px;transition:transform .35s,border-color .35s,box-shadow .35s}
+.neon-project:hover{transform:translateY(-5px);border-color:#bd72ff;box-shadow:0 15px 45px #0007,0 0 22px #a855f722}
+.neon-project-image{height:clamp(145px,16vw,220px)}
+.neon-project strong{font-size:14px;letter-spacing:-.035em;padding:13px 15px 5px}
+.neon-project>span{padding:0 15px;font-size:10px}
+.neon-about{gap:clamp(24px,3vw,44px);padding-top:64px;padding-bottom:64px}
+.neon-about-photo{height:clamp(250px,26vw,340px);border-radius:22px;box-shadow:0 18px 55px #0006}
+.neon-about-copy p{font-size:14px;line-height:1.7}
+.neon-services{padding-top:14px;padding-bottom:58px;gap:clamp(28px,3.5vw,50px)}
+.neon-service-grid{gap:14px}
+.neon-service{width:100%;min-width:0;text-align:left;font:inherit;cursor:pointer;position:relative;display:flex;align-items:center;gap:15px;padding:19px 17px;border:1px solid #ffffff12;border-radius:17px;background:linear-gradient(135deg,#1d1628,#100d15);min-height:90px;transition:transform .3s,border-color .3s,box-shadow .3s,background .3s}
+.neon-service:hover{transform:translateY(-4px);border-color:#a855f788;box-shadow:0 12px 32px #0006,0 0 20px #a855f733;background:linear-gradient(135deg,#281638,#130e1b)}
+.neon-service>b{width:48px;height:48px;flex:none;border:1px solid #a855f766;border-radius:14px;background:radial-gradient(circle at 35% 25%,#c77dff44,transparent 70%),#1c1228;display:grid;place-items:center;color:#d29aff;text-shadow:none;box-shadow:inset 0 0 18px #a855f722,0 0 16px #a855f722}
+.neon-service>b svg{width:27px;height:27px;stroke-width:1.55;filter:drop-shadow(0 0 7px #b66aff88)}
+.neon-service>span:nth-child(2){min-width:0}
+.neon-service strong{font-size:12px;letter-spacing:-.025em}
+.neon-service small{font-size:10px;line-height:1.5;color:#bcb1c8}
+.neon-service-arrow{margin-left:auto;color:#d29aff;font-size:16px;opacity:.65;transition:transform .25s,opacity .25s}
+.neon-service:hover .neon-service-arrow{transform:translate(3px,-3px);opacity:1}
+.neon-process{padding-top:35px;padding-bottom:48px;gap:40px}
+.neon-steps{gap:24px}
+.neon-steps b{width:36px;height:36px;font-size:12px;box-shadow:0 0 18px #a855f766,inset 0 0 12px #bd72ff44}
+.neon-steps span{font-size:12px;line-height:1.55}
+.neon-cta{min-height:165px;padding:32px 4%;border-radius:30px}
+.neon-cta h2{font-size:clamp(25px,2.7vw,34px);line-height:1.12;letter-spacing:-.055em}
+.neon-footer{padding-top:26px;padding-bottom:30px}
+.neon-footer>a:last-child{width:38px;height:38px;border:1px solid #a855f766;border-radius:50%;display:grid;place-items:center;color:#d6a5ff;transition:.25s}
+.neon-footer>a:last-child:hover{background:#a855f722;box-shadow:0 0 18px #a855f766}
+.neon-footer>a:last-child svg{width:17px;height:17px}
+.neon-section-intro>button.neon-outline{cursor:pointer;background:transparent;color:inherit}
+.neon-section-intro>button.neon-outline:hover{background:#a855f722}
+@media(max-width:800px){.neon-hero{min-height:660px}.neon-service{min-height:86px;padding:14px}.neon-about{padding-top:45px;padding-bottom:45px}}
+@media(max-width:520px){.neon-service{min-height:82px}.neon-service>b{width:40px;height:40px}.neon-service>b svg{width:23px;height:23px}.neon-process{gap:24px}}
