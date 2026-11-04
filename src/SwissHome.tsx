@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import './swiss-home.css'
 import portrait from '../konstantin-portrait.jpg'
 
@@ -17,9 +17,12 @@ const services = [
 const steps = ['Обсуждаем задачу','Готовлю концепцию','Создаю дизайн и вношу правки','Передаю проект и помогаю с запуском']
 
 export default function SwissHome({language,onToggleLanguage,projects}:Props) {
+ const cursorRef=useRef<HTMLDivElement>(null)
+ const [cursorActive,setCursorActive]=useState(false)
+ useEffect(()=>{if(!window.matchMedia('(pointer:fine)').matches)return;const node=cursorRef.current;if(!node)return;const move=(e:PointerEvent)=>{node.style.transform='translate3d('+e.clientX+'px,'+e.clientY+'px,0)'};const enter=(e:PointerEvent)=>{if((e.target as HTMLElement)?.closest('a,button,[role="button"]'))setCursorActive(true)};const leave=()=>setCursorActive(false);window.addEventListener('pointermove',move);document.addEventListener('pointerover',enter);document.addEventListener('pointerout',leave);return()=>{window.removeEventListener('pointermove',move);document.removeEventListener('pointerover',enter);document.removeEventListener('pointerout',leave)}},[])
  const ru=language==='ru'
  const t=(r:string,e:string)=>ru?r:e
- return <div className="swiss-home" id="swiss-home-top">
+ return <div className="swiss-home" id="swiss-home-top"><div ref={cursorRef} className={`neon-cursor ${cursorActive ? "is-active" : ""}`}><span>VIEW</span></div>
   <header className="neon-nav">
    <a className="neon-logo" href="#swiss-home-top">KV</a>
    <nav>
