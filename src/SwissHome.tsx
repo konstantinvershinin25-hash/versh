@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from 'react'
 import './swiss-home.css'
+import portrait from '../konstantin-portrait.jpg'
 
 type Language = 'ru' | 'en'
 type HomeProject = {
@@ -148,7 +149,7 @@ export default function SwissHome({ language, onToggleLanguage, projects }: Prop
         <div className="swiss-wrap">
           <div className="swiss-section-head swiss-kicker"><span>{t.aboutMeLabel}</span><span>VERSH®</span></div>
           <div className="swiss-about-me">
-            <div className="swiss-about-photo"><img src="/images/konstantin-portrait.jpg" alt="Константин Вершинин — независимый дизайнер" /></div>
+            <div className="swiss-about-photo"><img src={portrait} alt="Константин Вершинин — независимый дизайнер" /></div>
             <div className="swiss-about-me-content">
               <h2>{t.aboutMeTitle}</h2>
               <p className="swiss-about-lead">{t.aboutMeLead}</p>
