@@ -8,3 +8,10 @@
 .swiss-home footer.neon-footer{padding:20px 0 28px;display:flex;align-items:center;justify-content:flex-start;border-top:1px solid #ffffff18;color:#f8f4ff;font-size:11px;letter-spacing:normal}
 .swiss-home footer.neon-footer nav{display:flex;align-items:center}
 .swiss-home footer.neon-footer a{color:inherit}
+
+.swiss-home,.swiss-home a,.swiss-home button{cursor:none}
+.neon-cursor{position:fixed;left:0;top:0;width:12px;height:12px;border-radius:50%;border:1px solid #f4dfff;background:#bd72ff;box-shadow:0 0 12px #bd72ff,0 0 28px #a855f7aa;pointer-events:none;z-index:99999;transform:translate3d(-100px,-100px,0);transition:width .25s,height .25s,background .25s,box-shadow .25s;display:grid;place-items:center;will-change:transform}
+.neon-cursor span{font-size:9px;font-weight:800;letter-spacing:.08em;color:#13091e;opacity:0;transition:opacity .2s}
+.neon-cursor.is-active{width:58px;height:58px;background:#d9adff;box-shadow:0 0 20px #a855f7,0 0 50px #a855f799}
+.neon-cursor.is-active span{opacity:1}
+@media(pointer:coarse){.swiss-home,.swiss-home a,.swiss-home button{cursor:auto}.neon-cursor{display:none}}
