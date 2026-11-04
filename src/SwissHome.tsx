@@ -1,215 +1,57 @@
-import React, { useMemo, useState } from 'react'
+import React from 'react'
 import './swiss-home.css'
 import portrait from '../konstantin-portrait.jpg'
 
 type Language = 'ru' | 'en'
-type HomeProject = {
-  id: string
-  title: string
-  type: string
-  year: string
-  image?: string
-  onOpen: () => void
-}
+type HomeProject = { id:string; title:string; type:string; year:string; image?:string; onOpen:()=>void }
+type Props = { language:Language; onToggleLanguage:()=>void; projects:HomeProject[] }
 
-type Props = {
-  language: Language
-  onToggleLanguage: () => void
-  projects: HomeProject[]
-}
+const services = [
+  ['▱','Дизайн сайтов','Лендинги, сайты-визитки и цифровые продукты'],
+  ['⟳','Редизайн','Обновление и развитие существующих сайтов'],
+  ['♧','Интернет-магазины','Каталоги и e-commerce решения'],
+  ['▥','UX/UI консультации','Аудит интерфейсов и рекомендации'],
+  ['▯','Адаптация','Дизайн для мобильных устройств'],
+  ['⚙','Поддержка','Развитие и сопровождение проекта'],
+]
+const steps = ['Обсуждаем задачу','Готовлю концепцию','Создаю дизайн и вношу правки','Передаю проект и помогаю с запуском']
 
-const copy = {
-  ru: {
-    role: 'НЕЗАВИСИМАЯ ДИЗАЙН-ПРАКТИКА / 2026',
-    location: 'РАБОТАЮ С БИЗНЕСОМ В РОССИИ И ПО ВСЕМУ МИРУ',
-    headline: <>ДИЗАЙН,<br />КОТОРЫЙ ДЕЛАЕТ<br /><span>БИЗНЕС СИЛЬНЕЕ.</span></>,
-    intro: 'Создаю визуальные системы, цифровые продукты и коммуникации, которые помогают брендам выглядеть убедительно и говорить с аудиторией на одном языке.',
-    discuss: 'ОБСУДИТЬ ПРОЕКТ',
-    works: 'СМОТРЕТЬ РАБОТЫ',
-    selected: '01 — КЕЙСЫ',
-    aboutMeLabel: '02 — ОБО МНЕ',
-    aboutMeTitle: <>КОНСТАНТИН<br /><span>ВЕРШИНИН.</span></>,
-    aboutMeLead: 'Независимый дизайнер. Помогаю бизнесу находить свой визуальный язык и превращать идеи в цельные, продуманные решения.',
-    aboutMeText: 'В дизайне с 2022 года. Работаю с брендингом, сайтами, digital-продуктами и визуальными коммуникациями. В каждом проекте для меня важны не только эстетика, но и задача бизнеса: понять её, выстроить логику и довести решение до результата.',
-    aboutMeNote: '4+ ГОДА В ДИЗАЙНЕ · ОТ ИДЕИ ДО РЕАЛИЗАЦИИ',
-    all: 'ВСЕ',
-    web: 'WEB',
-    branding: 'BRANDING',
-    commerce: 'E-COMMERCE',
-    other: 'OTHER',
-    aboutLabel: '03 — ПОДХОД',
-    aboutTitle: 'ДИЗАЙН С ЦЕЛЬЮ.',
-    aboutText: 'Я помогаю бизнесу превращать идеи и задачи в понятные визуальные решения. В работе соединяю стратегическое мышление, внимание к деталям и функциональный дизайн.',
-    aboutNote: 'ОТ ПЕРВОГО БРИФА ДО ГОТОВОГО РЕШЕНИЯ',
-    servicesLabel: '03 — НАПРАВЛЕНИЯ',
-    servicesTitle: 'ЧЕМ МОГУ БЫТЬ ПОЛЕЗЕН',
-    services: [
-      ['01', 'Брендинг и айдентика', 'Логотипы, фирменный стиль, визуальные системы и гайдлайны.'],
-      ['02', 'Сайты и digital', 'Структура, UX/UI и дизайн сайтов для компаний и продуктов.'],
-      ['03', 'E-commerce дизайн', 'Карточки товаров, контент для маркетплейсов и интернет-магазинов.'],
-      ['04', 'Визуальные коммуникации', 'Презентации, рекламные материалы и графический дизайн.'],
-    ],
-    contactLabel: '04 — КОНТАКТ',
-    contactTitle: <>ЕСТЬ ЗАДАЧА?<br /><em>ДАВАЙТЕ ОБСУДИМ.</em></>,
-    email: 'НАПИСАТЬ НА ПОЧТУ',
-    footer: 'НЕЗАВИСИМЫЙ ДИЗАЙНЕР',
-    top: 'НАВЕРХ ↑',
-    view: 'ОТКРЫТЬ КЕЙС',
-  },
-  en: {
-    role: 'INDEPENDENT DESIGN PRACTICE / 2026',
-    location: 'WORKING WITH BUSINESSES WORLDWIDE',
-    headline: <>DESIGN THAT<br />MAKES YOUR<br /><span>BUSINESS STRONGER.</span></>,
-    intro: 'I create visual systems, digital products and communications that help brands look confident and connect with their audience.',
-    discuss: 'START A PROJECT',
-    works: 'EXPLORE WORK',
-    selected: '01 — CASE STUDIES',
-    aboutMeLabel: '02 — ABOUT ME',
-    aboutMeTitle: <>KONSTANTIN<br /><span>VERSHININ.</span></>,
-    aboutMeLead: 'Independent designer. I help businesses find their visual language and turn ideas into thoughtful, cohesive solutions.',
-    aboutMeText: 'Working in design since 2022. My practice spans branding, websites, digital products and visual communication. I care not only about aesthetics, but also about the purpose behind every project: understanding the challenge, building a clear approach and bringing the solution to life.',
-    aboutMeNote: '4+ YEARS IN DESIGN · FROM IDEA TO DELIVERY',
-    all: 'ALL',
-    web: 'WEB',
-    branding: 'BRANDING',
-    commerce: 'E-COMMERCE',
-    other: 'OTHER',
-    aboutLabel: '03 — APPROACH',
-    aboutTitle: 'DESIGN WITH INTENT.',
-    aboutText: 'I help businesses turn ideas and challenges into clear visual solutions, combining strategic thinking, attention to detail and functional design.',
-    aboutNote: 'FROM FIRST BRIEF TO FINAL DELIVERY',
-    servicesLabel: '03 — SERVICES',
-    servicesTitle: 'HOW I CAN HELP',
-    services: [
-      ['01', 'Branding & identity', 'Logos, visual identity, design systems and guidelines.'],
-      ['02', 'Web & digital', 'Structure, UX/UI and website design for businesses and products.'],
-      ['03', 'E-commerce design', 'Product cards, marketplace content and online store visuals.'],
-      ['04', 'Visual communication', 'Presentations, advertising materials and graphic design.'],
-    ],
-    contactLabel: '04 — CONTACT',
-    contactTitle: <>HAVE A PROJECT?<br /><em>LET’S TALK.</em></>,
-    email: 'SEND AN EMAIL',
-    footer: 'INDEPENDENT DESIGNER',
-    top: 'BACK TO TOP ↑',
-    view: 'VIEW CASE',
-  },
-} as const
-
-function categoryOf(type: string): 'web' | 'branding' | 'commerce' | 'other' {
-  const value = type.toLowerCase()
-  if (value.includes('brand') || value.includes('logo') || value.includes('identity')) return 'branding'
-  if (value.includes('commerce') || value.includes('market') || value.includes('e-commerce')) return 'commerce'
-  if (value.includes('web') || value.includes('digital') || value.includes('ui') || value.includes('ux')) return 'web'
-  return 'other'
-}
-
-export default function SwissHome({ language, onToggleLanguage, projects }: Props) {
-  const t = copy[language]
-  const [filter, setFilter] = useState('all')
-  const visibleProjects = useMemo(
-    () => filter === 'all' ? projects : projects.filter((project) => categoryOf(project.type) === filter),
-    [filter, projects],
-  )
-  const filters = [
-    ['all', t.all], ['web', t.web], ['branding', t.branding], ['commerce', t.commerce], ['other', t.other],
-  ]
-
-  return (
-    <div className="swiss-home" id="swiss-home-top">
-      <div className="swiss-wrap">
-        <header className="swiss-nav">
-          <a className="swiss-brand" href="/" aria-label="VERSH home">VERSH<sup>®</sup></a>
-          <nav className="swiss-nav-links" aria-label="Main navigation">
-            <a href="#swiss-work">{language === 'ru' ? 'РАБОТЫ' : 'WORK'}</a>
-            <a href="#swiss-about">{language === 'ru' ? 'ОБО МНЕ' : 'ABOUT'}</a>
-            <a href="#swiss-services">{language === 'ru' ? 'УСЛУГИ' : 'SERVICES'}</a>
-            <a className="swiss-nav-cta" href="#swiss-contact"><span>{language === 'ru' ? 'СВЯЗАТЬСЯ' : 'CONTACT'}</span><b aria-hidden="true">↗</b></a>
-            <button className="swiss-lang" type="button" onClick={onToggleLanguage}>{language === 'ru' ? 'RU / EN' : 'EN / RU'}</button>
-          </nav>
-        </header>
-        <main>
-          <section className="swiss-hero">
-            <div className="swiss-hero-top">
-              <div className="swiss-kicker">{t.role}<br />BRANDING / DIGITAL / E-COMMERCE</div>
-              <div className="swiss-kicker swiss-hero-index">CHELYABINSK / WORLDWIDE<br />{language === 'ru' ? 'ОТКРЫТ К НОВЫМ ПРОЕКТАМ' : 'AVAILABLE FOR PROJECTS'}</div>
-            </div>
-            <h1>{t.headline}</h1>
-            <div className="swiss-hero-bottom">
-              <p>{t.intro}</p>
-              <div className="swiss-actions">
-                <a className="swiss-button primary" href="#swiss-contact">{t.discuss} <span>↗</span></a>
-                <a className="swiss-button" href="#swiss-work">{t.works} <span>↓</span></a>
-              </div>
-            </div>
-          </section>
-        </main>
-      </div>
-      <hr className="swiss-rule" />
-      <section className="swiss-section" id="swiss-work">
-        <div className="swiss-wrap">
-          <div className="swiss-section-head swiss-kicker"><span>{t.selected}</span><span>({String(projects.length).padStart(2, '0')})</span></div>
-          <div className="swiss-filter-row" aria-label="Project categories">
-            {filters.map(([key, label]) => <button key={key} type="button" className={`swiss-filter ${filter === key ? 'active' : ''}`} onClick={() => setFilter(key)}>{label}</button>)}
-          </div>
-          <div className="swiss-project-grid">
-            {visibleProjects.map((project, index) => (
-              <button className={`swiss-project swiss-project-${project.id}`} key={project.id} type="button" onClick={project.onOpen} aria-label={`${t.view}: ${project.title}`}>
-                <div className="swiss-project-visual"><span className="swiss-project-index">{String(index + 1).padStart(2, '0')}</span><span className="swiss-project-open">{t.view} ↗</span>
-                  {project.image ? <img src={project.image} alt={project.title} loading={index > 1 ? 'lazy' : 'eager'} /> : <div className="swiss-project-placeholder">VERSH® / SELECTED WORK</div>}
-                </div>
-                <div className="swiss-project-info">
-                  <div><div className="swiss-project-name">{project.title}</div><div className="swiss-project-meta">{project.type}</div></div>
-                  <div className="swiss-project-meta">{project.year}<span className="swiss-project-arrow"> ↗</span></div>
-                </div>
-              </button>
-            ))}
-          </div>
-        </div>
-      </section>
-      <hr className="swiss-rule" />
-      <section className="swiss-section" id="swiss-about">
-        <div className="swiss-wrap">
-          <div className="swiss-section-head swiss-kicker"><span>{t.aboutMeLabel}</span><span>VERSH®</span></div>
-          <div className="swiss-about-me">
-            <div className="swiss-about-photo"><img src={portrait} alt="Константин Вершинин — независимый дизайнер" /></div>
-            <div className="swiss-about-me-content">
-              <h2>{t.aboutMeTitle}</h2>
-              <p className="swiss-about-lead">{t.aboutMeLead}</p>
-              <p className="swiss-about-description">{t.aboutMeText}</p>
-              <div className="swiss-about-me-note">{t.aboutMeNote}</div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <hr className="swiss-rule" />
-      <section className="swiss-section" id="swiss-services">
-        <div className="swiss-wrap">
-          <div className="swiss-section-head swiss-kicker"><span>{t.servicesLabel}</span><span>04</span></div>
-          <h2 className="swiss-section-title">{t.servicesTitle}</h2>
-          <div className="swiss-services">
-            {t.services.map(([number, title, description]) => (
-              <a className="swiss-service" href="#swiss-contact" key={number}>
-                <span className="swiss-service-no">{number}</span>
-                <div><h3>{title}</h3><p>{description}</p></div>
-                <span className="swiss-service-arrow">↗</span>
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
-      <section className="swiss-contact" id="swiss-contact">
-        <div className="swiss-wrap">
-          <div className="swiss-kicker">{t.contactLabel}</div>
-          <h2>{t.contactTitle}</h2>
-          <div className="swiss-contact-bottom">
-            <div className="swiss-contact-links"><a className="swiss-contact-mail" href="mailto:konstantinversh@icloud.com">konstantinversh@icloud.com ↗</a><a className="swiss-contact-mail" href="https://t.me/KV252525" target="_blank" rel="noreferrer">TELEGRAM @KV252525 ↗</a></div>
-            <a className="swiss-button" href="mailto:konstantinversh@icloud.com?subject=VERSH%20%E2%80%94%20Project%20inquiry">{t.email}</a>
-          </div>
-        </div>
-      </section>
-      <footer className="swiss-wrap swiss-footer">
-        <span>© 2026 VERSH®</span><span>{t.footer}</span><a href="#swiss-home-top" onClick={(event) => { event.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }) }}>{t.top}</a>
-      </footer>
+export default function SwissHome({language,onToggleLanguage,projects}:Props) {
+ const ru=language==='ru'
+ const t=(r:string,e:string)=>ru?r:e
+ return <div className="swiss-home" id="swiss-home-top">
+  <header className="neon-nav">
+   <a className="neon-logo" href="#swiss-home-top">KV</a>
+   <nav>
+    <a href="#swiss-about">{t('Обо мне','About')}</a><a href="#swiss-work">{t('Кейсы','Work')}</a><a href="#swiss-services">{t('Услуги','Services')}</a><a href="#swiss-process">{t('Процесс','Process')}</a><a href="#swiss-process">{t('Отзывы','Reviews')}</a><a href="#swiss-contact">{t('Контакты','Contact')}</a>
+   </nav>
+   <div className="neon-nav-actions"><button className="neon-lang" onClick={onToggleLanguage}>{ru?'RU / EN':'EN / RU'}</button><a className="neon-outline" href="#swiss-contact">{t('Обсудить проект','Discuss project')} <span>→</span></a></div>
+  </header>
+  <main>
+   <section className="neon-hero">
+    <div className="neon-orbit neon-orbit-one"/><div className="neon-orbit neon-orbit-two"/>
+    <div className="neon-hero-copy">
+     <div className="neon-pill"><i/> {t('Веб-дизайнер','Web designer')}</div>
+     <h1>{t('Создаю сайты,','I create websites,')}<br/>{t('которые','that')}<br/><em>{t('продают','convert')}</em></h1>
+     <p>{t('Современный дизайн, продуманный UX и результат для вашего бизнеса','Modern design, thoughtful UX and results for your business')}</p>
+     <div className="neon-hero-buttons"><a className="neon-button" href="#swiss-contact">{t('Обсудить проект','Discuss project')} <span>→</span></a><a className="neon-play" href="#swiss-work"><b>▶</b><span>{t('Посмотреть','Explore')}<br/>{t('кейсы','projects')}</span></a></div>
+     <div className="neon-benefits"><span>ϟ <small>{t('Быстро и качественно','Fast & reliable')}</small></span><span>◇ <small>{t('С вниманием к деталям','Attention to detail')}</small></span><span>▥ <small>{t('Ориентирован на результат','Result focused')}</small></span></div>
     </div>
-  )
+    <div className="neon-hero-person"><div className="neon-code-card">〈 / 〉</div><div className="neon-glass-card">DIGITAL<br/>EXPERIENCE</div><img src={portrait} alt="Константин Вершинин"/></div>
+   </section>
+   <section className="neon-work" id="swiss-work">
+    <div className="neon-section-intro"><div className="neon-eyebrow">● {t('Кейсы','Selected work')}</div><h2>{t('Мои работы','My work')}</h2><p>{t('Реализую проекты в разных нишах: от лендингов до интернет-магазинов','Projects across different industries — from landing pages to online stores')}</p><a className="neon-outline" href="#swiss-work">{t('Все кейсы','All projects')} →</a></div>
+    <div className="neon-projects">{projects.slice(0,3).map((project,i)=><button className="neon-project" key={project.id} onClick={project.onOpen}><div className="neon-project-image">{project.image?<img src={project.image} alt={project.title}/>:<span>KV / SELECTED WORK</span>}<small>{i===0?'WEB':i===1?'DIGITAL':'CAMPAIGN'}</small></div><strong>{project.title}</strong><span>{project.type} · {project.year}<b>↗</b></span></button>)}</div>
+   </section>
+   <section className="neon-about" id="swiss-about">
+    <div className="neon-about-photo"><img src={portrait} alt="Константин Вершинин"/><span>{t('Делаю сайты с душой ♡','Designing with care ♡')}</span></div>
+    <div className="neon-about-copy"><div className="neon-eyebrow">● {t('Обо мне','About me')}</div><h2>{t('Мне 25 лет.','I am 25.')}<br/>{t('Я веб-дизайнер','I am a web designer')}</h2><p>{t('Уже 3 года создаю сайты, которые помогают бизнесу расти. Люблю дизайн, технологии и эстетику в деталях.','Since 2022, I have been creating websites that help businesses grow. I love design, technology and thoughtful details.')}</p><a className="neon-outline" href="https://t.me/KV252525" target="_blank" rel="noreferrer">{t('Узнать больше','Get in touch')} →</a></div>
+    <div className="neon-values"><div>♡ <span>{t('Делаю дизайн, который работает','Design that works')}</span></div><div>▱ <span>{t('Погружаюсь в ваш бизнес и задачи','Focused on your business')}</span></div><div>◇ <span>{t('Ценю качество и довожу до результата','Quality from start to finish')}</span></div></div>
+   </section>
+   <section className="neon-services" id="swiss-services"><div className="neon-section-intro"><div className="neon-eyebrow">● {t('Услуги','Services')}</div><h2>{t('Что я предлагаю?','What I offer')}</h2><p>{t('Полный цикл создания сайта от идеи до запуска','Full website creation, from idea to launch')}</p><a className="neon-button" href="#swiss-contact">{t('Обсудить проект','Discuss project')} →</a></div><div className="neon-service-grid">{services.map(([icon,title,desc])=><a href="#swiss-contact" className="neon-service" key={title}><b>{icon}</b><span><strong>{t(title,title)}</strong><small>{t(desc,desc)}</small></span></a>)}</div></section>
+   <section className="neon-process" id="swiss-process"><div><div className="neon-eyebrow">● {t('Как мы работаем','How it works')}</div><h2>{t('Простой процесс','A simple process')}<br/>{t('от идеи до запуска','from idea to launch')}</h2></div><div className="neon-steps">{steps.map((step,i)=><div key={step}><b>{i+1}</b><span>{t(step, ['Discuss the brief','Prepare a concept','Design and refine','Deliver and launch'][i])}</span></div>)}</div></section>
+   <section className="neon-cta" id="swiss-contact"><div><h2>{t('Давайте создадим','Let’s create')}<br/>{t('ваш идеальный сайт?','your ideal website?')}</h2><p>{t('Напишите мне — обсудим задачу, сроки и идеи','Message me to discuss your goals, timing and ideas')}</p></div><a className="neon-button" href="https://t.me/KV252525" target="_blank" rel="noreferrer">➤ {t('Написать в Telegram','Message on Telegram')} →</a><div className="neon-phone">➤</div></section>
+  </main>
+  <footer className="neon-footer"><a className="neon-logo" href="#swiss-home-top">KV</a><span>{t('Веб-дизайнер','Web designer')}</span><nav><a href="#swiss-about">{t('Обо мне','About')}</a><a href="#swiss-work">{t('Кейсы','Work')}</a><a href="#swiss-services">{t('Услуги','Services')}</a><a href="#swiss-process">{t('Процесс','Process')}</a><a href="#swiss-contact">{t('Контакты','Contact')}</a></nav><a href="https://t.me/KV252525">↗ Telegram</a><a href="mailto:konstantinversh@icloud.com">✉</a></footer>
+ </div>
 }
