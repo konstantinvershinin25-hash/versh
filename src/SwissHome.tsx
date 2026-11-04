@@ -21,7 +21,7 @@ function Icon({name}:{name:string}){const paths:Record<string,string>={bolt:'M13
 export default function SwissHome({language,onToggleLanguage,projects}:Props) {
  const cursorRef=useRef<HTMLDivElement>(null)
  const [cursorActive,setCursorActive]=useState(false)
- useEffect(()=>{if(!window.matchMedia('(pointer:fine)').matches)return;const node=cursorRef.current;if(!node)return;const move=(e:PointerEvent)=>{node.style.transform='translate3d('+e.clientX+'px,'+e.clientY+'px,0)'};const enter=(e:PointerEvent)=>{if((e.target as HTMLElement)?.closest('a,button,[role="button"]'))setCursorActive(true)};const leave=()=>setCursorActive(false);window.addEventListener('pointermove',move);document.addEventListener('pointerover',enter);document.addEventListener('pointerout',leave);return()=>{window.removeEventListener('pointermove',move);document.removeEventListener('pointerover',enter);document.removeEventListener('pointerout',leave)}},[])
+ useEffect(()=>{if(!window.matchMedia('(pointer:fine)').matches)return;const node=cursorRef.current;if(!node)return;const move=(e:PointerEvent)=>{node.style.transform='translate3d('+e.clientX+'px,'+e.clientY+'px,0) translate(-50%,-50%)';setCursorActive(Boolean((e.target as HTMLElement)?.closest('a,button,[role="button"]')))};window.addEventListener('pointermove',move);return()=>window.removeEventListener('pointermove',move)},[])
  const ru=language==='ru'
  const t=(r:string,e:string)=>ru?r:e
  return <div className="swiss-home" id="swiss-home-top"><div ref={cursorRef} className={`neon-cursor ${cursorActive ? "is-active" : ""}`}><span>VIEW</span></div>
