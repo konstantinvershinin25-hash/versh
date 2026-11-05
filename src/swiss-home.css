@@ -82,3 +82,12 @@
 .neon-about-photo img{object-fit:cover;object-position:center 18%;background:#f5f3f7}
 
 /* Rebuild after replacing about-portrait.png (commit c05f7f0) */
+
+
+/* Process steps: vertically center the full group inside its grid column */
+.neon-process{align-items:center}
+.neon-steps{align-self:center;align-items:center;min-height:100%;padding-block:12px}
+.neon-steps>div{height:100%;min-height:112px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center}
+.neon-steps b{margin:0;flex:0 0 36px}
+.neon-steps span{max-width:190px;text-align:center}
+@media(max-width:800px){.neon-process{align-items:start}.neon-steps{width:100%;min-height:0;padding-block:4px}}
