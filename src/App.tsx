@@ -799,7 +799,7 @@ export default function App() {
     setEditingId(project.id)
     setAdminTitle(project.title)
     setAdminType(project.type)
-    setAdminCategory(project.category)
+    setAdminCategory(categorySlug(project.category, `${project.title} ${project.type}`))
     setAdminYear(project.year)
     setAdminDescription(project.description)
     setAdminServices(project.services.join(', '))
@@ -1276,7 +1276,7 @@ export default function App() {
       })),
       ...storedProjects.map((project) => ({
         id: project.id, title: project.title, type: project.type || project.category,
-        category: categorySlug(project.category || project.type), year: project.year,
+        category: categorySlug(project.category || project.type, `${project.title} ${project.type}`), year: project.year,
         image: project.images?.[0]?.src || '', onOpen: () => openCustomCase(project.id),
       })),
     ]
