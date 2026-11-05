@@ -614,7 +614,7 @@ export default function App() {
   const [editingId, setEditingId] = useState<string | null>(null)
   const [adminTitle, setAdminTitle] = useState('')
   const [adminType, setAdminType] = useState('WEB DESIGN')
-  const [adminCategory, setAdminCategory] = useState('WEB DESIGN')
+  const [adminCategory, setAdminCategory] = useState('sites')
   const [adminYear, setAdminYear] = useState('2026')
   const [adminDescription, setAdminDescription] = useState('')
   const [adminServices, setAdminServices] = useState('ART DIRECTION, WEB DESIGN, UI / UX')
@@ -1270,7 +1270,7 @@ export default function App() {
     const catalogProjects = [
       ...projects.map((project) => ({
         id: project.cls, title: project.title, type: project.type,
-        category: project.cls === 'pet' ? 'digital' : 'web-design',
+        category: 'sites',
         year: project.year, image: project.image,
         onOpen: () => openCase(project.cls === 'crystal' ? 'crystal' : project.cls === 'atlant' ? 'atlant' : 'pet'),
       })),
