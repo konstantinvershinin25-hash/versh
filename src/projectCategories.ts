@@ -11,18 +11,19 @@ export const PROJECT_CATEGORIES = [
 
 export type ProjectCategory = typeof PROJECT_CATEGORIES[number]['slug']
 
-export function categorySlug(value: string): ProjectCategory {
+export function categorySlug(value: string, context = ''): ProjectCategory {
   const raw = (value || '').toLowerCase().trim()
+  const clues = `${raw} ${context}`.toLowerCase()
   const match = PROJECT_CATEGORIES.find((c) => c.slug === raw || c.label.toLowerCase() === raw || c.en.toLowerCase() === raw)
   if (match) return match.slug
 
   // Compatibility mapping for projects saved with the previous category set.
-  if (/business.?card|визитк|сайт.?визит/.test(raw)) return 'business-cards'
-  if (/product.?card|карточк.*товар|инфографик|wildberries|ozon/.test(raw)) return 'product-cards'
-  if (/presentation|презентац|pitch.?deck/.test(raw)) return 'presentations'
-  if (/brand.?book|brandbook|брендбук|гайдлайн|фирменн.*стил/.test(raw)) return 'brandbook'
-  if (/logo|логотип|знак/.test(raw)) return 'logos'
-  if (/shop|e-?commerce|магазин|каталог/.test(raw)) return 'ecommerce'
-  if (/landing|лендинг|web|website|сайт|digital|дизайн|campaign|кампан|pet day/.test(raw)) return 'sites'
+  if (/business.?card|визитк|сайт.?визит/.test(clues)) return 'business-cards'
+  if (/product.?card|карточк.*товар|инфографик|wildberries|ozon/.test(clues)) return 'product-cards'
+  if (/presentation|презентац|pitch.?deck/.test(clues)) return 'presentations'
+  if (/brand.?book|brandbook|брендбук|гайдлайн|фирменн.*стил/.test(clues)) return 'brandbook'
+  if (/logo|логотип|знак/.test(clues)) return 'logos'
+  if (/shop|e-?commerce|магазин|каталог/.test(clues)) return 'ecommerce'
+  if (/landing|лендинг|web|website|сайт|digital|дизайн|campaign|кампан|pet day/.test(clues)) return 'sites'
   return 'other'
 }
