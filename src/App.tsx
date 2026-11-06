@@ -693,18 +693,36 @@ export default function App() {
 
   useEffect(() => {
     const cursorElement = cursor.current
-
     if (!cursorElement) return
 
     const handleMouseMove = (event: MouseEvent) => {
       cursorElement.style.left = `${event.clientX}px`
       cursorElement.style.top = `${event.clientY}px`
     }
+    const handlePointerOver = (event: MouseEvent) => {
+      const target = event.target as HTMLElement | null
+      const interactive = target?.closest('.portfolio-page .portfolio-card, .portfolio-page article, .portfolio-page [role="button"]')
+      const link = target?.closest('.portfolio-page a, .portfolio-page button')
+      cursorElement.classList.toggle('cursor-view', Boolean(interactive))
+      cursorElement.classList.toggle('cursor-link', Boolean(link) && !interactive)
+      const label = cursorElement.querySelector('span')
+      if (label) label.textContent = interactive ? 'VIEW' : link ? '↗' : ''
+    }
+    const handlePointerOut = (event: MouseEvent) => {
+      const next = event.relatedTarget as HTMLElement | null
+      if (next?.closest('.portfolio-page')) return
+      cursorElement.classList.remove('cursor-view', 'cursor-open', 'cursor-link')
+      const label = cursorElement.querySelector('span')
+      if (label) label.textContent = 'VIEW'
+    }
 
     window.addEventListener('mousemove', handleMouseMove)
-
+    document.addEventListener('mouseover', handlePointerOver)
+    document.addEventListener('mouseout', handlePointerOut)
     return () => {
       window.removeEventListener('mousemove', handleMouseMove)
+      document.removeEventListener('mouseover', handlePointerOver)
+      document.removeEventListener('mouseout', handlePointerOut)
     }
   }, [])
 
@@ -1280,7 +1298,12 @@ export default function App() {
         image: project.images?.[0]?.src || '', onOpen: () => openCustomCase(project.id),
       })),
     ]
-    return <PortfolioPages language={language} mode={portfolioMode} category={portfolioCategory} projects={catalogProjects} onBack={closePortfolio} />
+    return (
+      <>
+        <div className="cursor" ref={cursor}><span>VIEW</span></div>
+        <PortfolioPages language={language} mode={portfolioMode} category={portfolioCategory} projects={catalogProjects} onBack={closePortfolio} />
+      </>
+    )
   }
 
   const customProject = storedProjects.find((item) => item.id === customProjectId)
