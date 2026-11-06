@@ -9,12 +9,7 @@
 @media(max-width:650px){.portfolio-main{padding:58px 0 75px}.portfolio-heading{display:block;margin-bottom:30px}.portfolio-heading>span{display:block;margin-top:22px}.portfolio-grid{grid-template-columns:1fr;gap:30px}.portfolio-filters{gap:7px}.portfolio-filters a,.portfolio-filters button{font-size:10px;padding:9px 12px}.portfolio-image{aspect-ratio:1.2}.portfolio-view{opacity:1;transform:none}}
 
 
-/* Dedicated cursor for the all-cases and category portfolio pages */
-@media (min-width:701px) and (pointer:fine){
- .portfolio-page,.portfolio-page a,.portfolio-page button{cursor:none}
- .portfolio-cursor{position:fixed;left:0;top:0;width:12px;height:12px;border-radius:50%;border:1px solid #f4dfff;background:#bd72ff;color:#13091e;box-shadow:0 0 12px #bd72ff,0 0 28px #a855f7aa;pointer-events:none;z-index:999999;transform:translate3d(-100px,-100px,0);transition:width .25s,height .25s,background .25s,box-shadow .25s;display:grid;place-items:center;will-change:transform}
- .portfolio-cursor span{font-size:9px;font-weight:800;letter-spacing:.08em;opacity:0;transition:opacity .2s}
- .portfolio-cursor.is-active{width:58px;height:58px;background:#d9adff;box-shadow:0 0 20px #a855f7,0 0 50px #a855f799}
- .portfolio-cursor.is-active span{opacity:1}
-}
-@media (pointer:coarse),(max-width:700px){.portfolio-cursor{display:none}}
+
+/* Keep the system pointer visible on portfolio pages for reliable navigation */
+.portfolio-page,.portfolio-page a,.portfolio-page button{cursor:auto}
+.portfolio-page a,.portfolio-page button{cursor:pointer}
