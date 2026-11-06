@@ -79,7 +79,7 @@
 
 /* Uploaded personal portraits */
 .neon-hero-person img{object-fit:contain;object-position:center bottom;border-radius:22px 22px 0 0;filter:drop-shadow(0 0 34px #9a42ff66)}
-.neon-about-photo img{object-fit:cover;object-position:center 18%;background:#f5f3f7}
+.neon-about-photo img{display:block;width:100%;height:100%;object-fit:contain;object-position:center bottom;background:transparent;filter:drop-shadow(0 12px 22px #0005)}
 
 /* Rebuild after replacing about-portrait.png (commit c05f7f0) */
 
