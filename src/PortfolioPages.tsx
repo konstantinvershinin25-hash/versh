@@ -1,27 +1,14 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React from 'react'
 import {PROJECT_CATEGORIES,categorySlug} from './projectCategories'
 import './portfolio-pages.css'
 type Item={id:string;title:string;type:string;category:string;year:string;image?:string;onOpen:()=>void}
 type Props={language:'ru'|'en';mode:'all'|'category';category?:string;projects:Item[];onBack:()=>void}
 export default function PortfolioPages({language,mode,category,projects,onBack}:Props){
- const cursorRef=useRef<HTMLDivElement>(null)
- const [cursorActive,setCursorActive]=useState(false)
- useEffect(()=>{
-  if(!window.matchMedia('(pointer:fine)').matches)return
-  const node=cursorRef.current
-  if(!node)return
-  const move=(event:PointerEvent)=>{
-   node.style.transform=`translate3d(${event.clientX}px,${event.clientY}px,0) translate(-50%,-50%)`
-   setCursorActive(Boolean((event.target as HTMLElement)?.closest('a,button,[role="button"]')))
-  }
-  window.addEventListener('pointermove',move)
-  return()=>window.removeEventListener('pointermove',move)
- },[])
  const ru=language==='ru'
  const selected=PROJECT_CATEGORIES.find(c=>c.slug===category)
  const visible=mode==='category'?projects.filter(p=>categorySlug(p.category||p.type)===(category||'')):projects
  const title=mode==='category'?(ru?selected?.label:selected?.en):(ru?'Все проекты':'Selected work')
- return <div className="portfolio-page"><div ref={cursorRef} className={`portfolio-cursor ${cursorActive?'is-active':''}`} aria-hidden="true"><span>VIEW</span></div>
+ return <div className="portfolio-page">
   <header className="portfolio-top"><button className="portfolio-wordmark" onClick={onBack}>VERSH<span>®</span></button><button className="portfolio-back" onClick={onBack}>← {ru?'На главную':'Home'}</button></header>
   <main className="portfolio-main">
    <div className="portfolio-kicker"><i/> {ru?'ПОРТФОЛИО / 2026':'PORTFOLIO / 2026'}</div>
