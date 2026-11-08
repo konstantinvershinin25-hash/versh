@@ -4614,3 +4614,40 @@ footer {
     padding: 80px 5vw;
   }
 }
+/* VERSH neon purple case-study redesign */
+.case-page{--case-accent:#b86cff;--case-glow:#a855f7;background:radial-gradient(ellipse at 85% 5%,#35104f55,transparent 30%),#09070e!important;color:#f7f1ff!important}
+.case-page .case-nav{background:#09070eaa;border-bottom:1px solid #ffffff12;backdrop-filter:blur(18px)}
+.case-page .case-logo,.case-page .case-back{color:#f7f1ff!important}
+.case-page .case-back{border:1px solid #a855f7!important;border-radius:30px;padding:10px 18px;transition:background .25s,box-shadow .25s}
+.case-page .case-back:hover{background:#a855f722;box-shadow:0 0 22px #a855f755}
+.case-page .cursor{border-color:#e8caff!important;background:#b86cff!important;color:#13091e!important;box-shadow:0 0 16px #a855f7,0 0 36px #a855f799!important}
+.case-page .cursor span{color:#13091e!important;font-weight:800}
+.case-page .case-hero{min-height:76vh;padding:150px 6vw 80px!important;background:radial-gradient(ellipse at 80% 50%,#4b1b6d66,transparent 42%),linear-gradient(130deg,#100b17,#09070e)!important;border-bottom:1px solid #a855f733;position:relative;overflow:hidden}
+.case-page .case-hero:after{content:'';position:absolute;width:52vw;height:12vw;right:-10vw;top:42%;border:2px solid #a855f766;border-radius:50%;transform:rotate(-25deg);filter:drop-shadow(0 0 12px #a855f7);pointer-events:none}
+.case-page .case-hero-top,.case-page .case-hero-bottom{position:relative;z-index:1}
+.case-page .case-hero-top,.case-page .case-label{color:#c78bff!important;letter-spacing:.12em}
+.case-page .case-hero h1{font-size:clamp(54px,10vw,150px)!important;line-height:.9!important;letter-spacing:-.075em!important;color:#fff!important;max-width:1100px;text-shadow:0 0 36px #a855f722}
+.case-page .case-hero-bottom{display:grid!important;grid-template-columns:minmax(0,1.2fr) minmax(220px,.8fr);gap:8vw;align-items:end;margin-top:50px}
+.case-page .case-hero-bottom>p{max-width:620px;color:#d7cde1!important;font-size:16px!important;line-height:1.6}
+.case-page .case-services{border-left:1px solid #a855f766;padding-left:22px}
+.case-page .case-services span{color:#c78bff!important}
+.case-page .case-services b{border:1px solid #ffffff1c;background:#171020;border-radius:30px;padding:8px 12px;color:#eee2fa!important}
+.case-page .case-intro,.case-page .case-split,.case-page .case-result{background:transparent!important;border-color:#ffffff18!important}
+.case-page .case-label{font-size:11px!important}
+.case-page .case-intro h2,.case-page .case-split h2,.case-page .case-result h2{letter-spacing:-.06em!important}
+.case-page .case-intro h2 em,.case-page .case-split h2 em,.case-page .case-result h2 em{color:#bd78ff!important;font-style:normal}
+.case-page .case-intro-grid p,.case-page .case-split-content p,.case-page .case-result-text{color:#cfc4da!important;line-height:1.75}
+.case-page .case-feature,.case-page .case-gallery{padding-top:30px!important;padding-bottom:55px!important}
+.case-page .case-real-image{border:1px solid #a855f744;border-radius:20px;overflow:hidden;background:#15101d;box-shadow:0 18px 65px #0008}
+.case-page .case-real-image img{display:block;width:100%;height:auto;transition:transform .7s cubic-bezier(.22,1,.36,1)}
+.case-page .case-real-image:hover img{transform:scale(1.012)}
+.case-page .case-real-image figcaption{padding:13px 17px;color:#a99ab8!important;font-size:11px;letter-spacing:.04em}
+.case-page .case-pet-gallery{gap:28px}
+.case-page .case-next{border-top:1px solid #a855f744!important;border-bottom:1px solid #a855f744!important}
+.case-page .case-next button{width:100%;border:1px solid #a855f755!important;border-radius:22px;background:linear-gradient(130deg,#1b1225,#0c0911)!important;padding:34px!important;transition:box-shadow .3s,transform .3s}
+.case-page .case-next button:hover{box-shadow:0 0 32px #a855f744;transform:translateY(-3px)}
+.case-page .case-next small,.case-page .case-next span{color:#c78bff!important}
+.case-page .case-next strong{color:#fff!important}
+.case-page .case-footer{border-top:1px solid #ffffff18!important;color:#bcb0c8!important}
+.case-page .case-footer button{color:#d5a8ff!important}
+@media(max-width:700px){.case-page .case-hero{min-height:68vh;padding:125px 22px 55px!important}.case-page .case-hero h1{font-size:clamp(44px,14vw,82px)!important}.case-page .case-hero-bottom{grid-template-columns:1fr;gap:25px;margin-top:30px}.case-page .case-services{padding-left:14px}.case-page .case-next button{padding:24px!important}}

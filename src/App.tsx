@@ -1,4 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
+import SwissHome from './SwissHome'
+import PortfolioPages from './PortfolioPages'
+import { PROJECT_CATEGORIES, categorySlug } from './projectCategories'
 
 import kristallHome from './assets/kristall-home.png'
 import kristallShops from './assets/kristall-shops.png'
@@ -597,6 +600,8 @@ export default function App() {
 
   const [projectKey, setProjectKey] =
     useState<ProjectKey | null>(getProjectFromUrl)
+  const [portfolioMode, setPortfolioMode] = useState<'all'|'category'|null>(() => { const p=new URLSearchParams(window.location.search); return p.has('category')?'category':p.get('work')==='1'?'all':null })
+  const [portfolioCategory, setPortfolioCategory] = useState(() => new URLSearchParams(window.location.search).get('category') || '')
 
   const [storedProjects, setStoredProjects] = useState<StoredProject[]>([])
   const [adminMode, setAdminMode] = useState(() => new URLSearchParams(window.location.search).get('admin') === '1')
@@ -609,7 +614,7 @@ export default function App() {
   const [editingId, setEditingId] = useState<string | null>(null)
   const [adminTitle, setAdminTitle] = useState('')
   const [adminType, setAdminType] = useState('WEB DESIGN')
-  const [adminCategory, setAdminCategory] = useState('WEB DESIGN')
+  const [adminCategory, setAdminCategory] = useState('sites')
   const [adminYear, setAdminYear] = useState('2026')
   const [adminDescription, setAdminDescription] = useState('')
   const [adminServices, setAdminServices] = useState('ART DIRECTION, WEB DESIGN, UI / UX')
@@ -630,6 +635,8 @@ export default function App() {
     const handlePopState = () => {
       const params = new URLSearchParams(window.location.search)
       setProjectKey(getProjectFromUrl())
+      setPortfolioMode(params.has('category')?'category':params.get('work')==='1'?'all':null)
+      setPortfolioCategory(params.get('category') || '')
       setCustomProjectId(params.get('custom'))
       setAdminMode(params.get('admin') === '1')
     }
@@ -686,18 +693,36 @@ export default function App() {
 
   useEffect(() => {
     const cursorElement = cursor.current
-
     if (!cursorElement) return
 
     const handleMouseMove = (event: MouseEvent) => {
       cursorElement.style.left = `${event.clientX}px`
       cursorElement.style.top = `${event.clientY}px`
     }
+    const handlePointerOver = (event: MouseEvent) => {
+      const target = event.target as HTMLElement | null
+      const interactive = target?.closest('.portfolio-page .portfolio-card, .portfolio-page article, .portfolio-page [role="button"]')
+      const link = target?.closest('.portfolio-page a, .portfolio-page button')
+      cursorElement.classList.toggle('cursor-view', Boolean(interactive))
+      cursorElement.classList.toggle('cursor-link', Boolean(link) && !interactive)
+      const label = cursorElement.querySelector('span')
+      if (label) label.textContent = interactive ? 'VIEW' : link ? '↗' : ''
+    }
+    const handlePointerOut = (event: MouseEvent) => {
+      const next = event.relatedTarget as HTMLElement | null
+      if (next?.closest('.portfolio-page')) return
+      cursorElement.classList.remove('cursor-view', 'cursor-open', 'cursor-link')
+      const label = cursorElement.querySelector('span')
+      if (label) label.textContent = 'VIEW'
+    }
 
     window.addEventListener('mousemove', handleMouseMove)
-
+    document.addEventListener('mouseover', handlePointerOver)
+    document.addEventListener('mouseout', handlePointerOut)
     return () => {
       window.removeEventListener('mousemove', handleMouseMove)
+      document.removeEventListener('mouseover', handlePointerOver)
+      document.removeEventListener('mouseout', handlePointerOut)
     }
   }, [])
 
@@ -744,6 +769,22 @@ export default function App() {
     })
   }
 
+  const openPortfolio = () => {
+    window.history.pushState({}, '', '?work=1')
+    setPortfolioMode('all'); setPortfolioCategory(''); setProjectKey(null); setCustomProjectId(null)
+    window.scrollTo({ top: 0, behavior: 'instant' })
+  }
+  const openCategory = (slug: string) => {
+    window.history.pushState({}, '', '?category=' + encodeURIComponent(slug))
+    setPortfolioMode('category'); setPortfolioCategory(slug); setProjectKey(null); setCustomProjectId(null)
+    window.scrollTo({ top: 0, behavior: 'instant' })
+  }
+  const closePortfolio = () => {
+    window.history.pushState({}, '', window.location.pathname)
+    setPortfolioMode(null); setPortfolioCategory('')
+    window.scrollTo({ top: 0, behavior: 'instant' })
+  }
+
   const closeCase = () => {
     window.history.pushState({}, '', window.location.pathname)
     setProjectKey(null)
@@ -776,7 +817,7 @@ export default function App() {
     setEditingId(project.id)
     setAdminTitle(project.title)
     setAdminType(project.type)
-    setAdminCategory(project.category)
+    setAdminCategory(categorySlug(project.category, `${project.title} ${project.type}`))
     setAdminYear(project.year)
     setAdminDescription(project.description)
     setAdminServices(project.services.join(', '))
@@ -1136,7 +1177,7 @@ export default function App() {
               <label>TITLE<input value={adminTitle} onChange={(e) => setAdminTitle(e.target.value)} placeholder="PROJECT NAME" /></label>
               <div className="admin-form-row">
                 <label>TYPE<input value={adminType} onChange={(e) => setAdminType(e.target.value)} /></label>
-                <label>CATEGORY<input value={adminCategory} onChange={(e) => setAdminCategory(e.target.value)} /></label>
+                <label>CATEGORY<select value={categorySlug(adminCategory)} onChange={(e) => setAdminCategory(e.target.value)}>{PROJECT_CATEGORIES.map((item) => <option key={item.slug} value={item.slug}>{item.label}</option>)}</select></label>
                 <label>YEAR<input value={adminYear} onChange={(e) => setAdminYear(e.target.value)} /></label>
               </div>
               <label>DESCRIPTION<textarea value={adminDescription} onChange={(e) => setAdminDescription(e.target.value)} rows={5} /></label>
@@ -1240,6 +1281,28 @@ export default function App() {
           </section>
         </main>
       </div>
+    )
+  }
+
+  if (portfolioMode) {
+    const catalogProjects = [
+      ...projects.map((project) => ({
+        id: project.cls, title: project.title, type: project.type,
+        category: 'sites',
+        year: project.year, image: project.image,
+        onOpen: () => openCase(project.cls === 'crystal' ? 'crystal' : project.cls === 'atlant' ? 'atlant' : 'pet'),
+      })),
+      ...storedProjects.map((project) => ({
+        id: project.id, title: project.title, type: project.type || project.category,
+        category: categorySlug(project.category || project.type, `${project.title} ${project.type}`), year: project.year,
+        image: project.images?.[0]?.src || '', onOpen: () => openCustomCase(project.id),
+      })),
+    ]
+    return (
+      <>
+        <div className="cursor" ref={cursor}><span>VIEW</span></div>
+        <PortfolioPages language={language} mode={portfolioMode} category={portfolioCategory} projects={catalogProjects} onBack={closePortfolio} />
+      </>
     )
   }
 
@@ -1680,6 +1743,30 @@ export default function App() {
    * HOME PAGE
    * =========================================================
    */
+
+  if (!projectKey && !customProjectId && !adminMode) {
+    const homeProjects = [
+      ...projects.map((project) => ({
+        id: project.cls,
+        title: project.title,
+        type: project.type,
+        category: project.cls === 'pet' ? 'digital' : 'web-design',
+        year: project.year,
+        image: project.image,
+        onOpen: () => openCase(project.cls === 'crystal' ? 'crystal' : project.cls === 'atlant' ? 'atlant' : 'pet'),
+      })),
+      ...storedProjects.map((project) => ({
+        id: project.id,
+        title: project.title,
+        type: project.type || project.category,
+        category: categorySlug(project.category || project.type),
+        year: project.year,
+        image: project.images?.[0]?.src || '',
+        onOpen: () => openCustomCase(project.id),
+      })),
+    ]
+    return <SwissHome language={language} onToggleLanguage={toggleLanguage} projects={homeProjects} onOpenAll={openPortfolio} onOpenCategory={openCategory} />
+  }
 
   return (
 
